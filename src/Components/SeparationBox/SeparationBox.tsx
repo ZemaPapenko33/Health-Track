@@ -1,6 +1,5 @@
 import { Stack } from '@mui/material'
-import { DivBox } from '../DividingBox/DivBoxStyled'
-import { SpanTypography } from '../TypographySpan/TypographySpanStyled'
+import { DivBox, SpanTypography } from './Styles'
 
 const SeparationBox = () => {
   return (
