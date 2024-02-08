@@ -3,7 +3,11 @@ import { FormForRegAndAuthWrapper } from './FormForRegAndAuthStyled'
 import { Button, TextField } from '@mui/material'
 import { EmailInputWrapper } from '../EmailInput/EmailInputStyled'
 
-const FormForRegAndAuth = () => {
+interface IFormForRegAndAuth {
+  keyText: string
+}
+
+const FormForRegAndAuth: React.FC<IFormForRegAndAuth> = ({ keyText }) => {
   return (
     <FormForRegAndAuthWrapper>
       <EmailInputWrapper
@@ -18,13 +22,13 @@ const FormForRegAndAuth = () => {
       <TextField
         helperText="Please enter a password of at least 8 characters"
         label="Password"
-        type="password"
+        type="Password"
         variant="standard"
         margin="normal"
         size="medium"
         required
       />
-      <Button variant="contained">Sign in</Button>
+      <Button variant="contained">{keyText}</Button>
     </FormForRegAndAuthWrapper>
   )
 }
