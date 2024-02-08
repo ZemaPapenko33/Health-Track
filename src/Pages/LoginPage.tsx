@@ -14,7 +14,7 @@ const LoginPage = (): JSX.Element => {
       <Stack width={`50%`} alignItems={'center'} justifyContent={'center'}>
         <Typography variant="h2">Health Track</Typography>
         <Typography variant="subtitle1">Welcome back</Typography>
-        <FormForRegAndAuth />
+        <FormForRegAndAuth keyText="Sign in" />
         <SeparationBox />
         <Button variant="outlined">
           <Stack gap={1} flexDirection={'row'}>
