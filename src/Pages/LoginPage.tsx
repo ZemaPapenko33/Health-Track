@@ -12,17 +12,17 @@ const LoginPage = (): JSX.Element => {
   return (
     <Stack width={`100vw`} flexDirection={`row`} height={`100vh`}>
       <Box width={`50%`}>
-        <BgImage src={imgBack} alt={t('background')} />
+        <BgImage src={imgBack} alt={t('t-background')} />
       </Box>
       <Stack width={`50%`} alignItems={'center'} justifyContent={'center'}>
-        <Typography variant="h2">{t('Health Track')}</Typography>
-        <Typography variant="subtitle1">{t('Welcome back')}</Typography>
-        <FormForRegAndAuth keyText={t('Sign in')} />
+        <Typography variant="h2">{t('t-health-track')}</Typography>
+        <Typography variant="subtitle1">{t('t-welcome-back')}</Typography>
+        <FormForRegAndAuth keyText={t('t-sign-in')} />
         <SeparationBox />
         <Button variant="outlined">
           <Stack gap={1} flexDirection={'row'}>
             <GoogleIcon />
-            <Typography>{t('Sign in with Google')}</Typography>
+            <Typography>{t('t-sign-in-with-Google')}</Typography>
           </Stack>
         </Button>
       </Stack>

@@ -10,12 +10,12 @@ const RegisterPage = (): JSX.Element => {
   return (
     <Stack width={`100vw`} flexDirection={`row`} height={`100vh`}>
       <Box width={`50%`}>
-        <BgImage src={imgBack} alt={t('background')} />
+        <BgImage src={imgBack} alt={t('t-background')} />
       </Box>
       <Stack width={`50%`} alignItems={'center'} justifyContent={'center'}>
-        <Typography variant="h2">{t('Health Track')}</Typography>
-        <Typography variant="subtitle1">{t('Welcome')}</Typography>
-        <FormForRegAndAuth keyText={t('Register')} />
+        <Typography variant="h2">{t('t-health-track')}</Typography>
+        <Typography variant="subtitle1">{t('t-welcome')}</Typography>
+        <FormForRegAndAuth keyText={t('t-register')} />
       </Stack>
     </Stack>
   )

@@ -1,9 +1,14 @@
 {
-  "background": "фон",
-  "Health Track": "Трекер здоровья",
-  "Welcome back": "Добро пожаловать обратно",
-  "Sign in": "Войти",
-  "Sign in with Google": "Войти через Google",
-  "Welcome": "Добро пожаловать",
-  "Register": "Регистрация"
+  "t-background": "фон",
+  "t-health-track": "Трекер здоровья",
+  "t-welcome-back": "Добро пожаловать обратно",
+  "t-sign-in": "Войти",
+  "t-sign-in-with-Google": "Войти через Google",
+  "t-welcome": "Добро пожаловать",
+  "t-register": "Регистрация",
+  "t-or": "или",
+  "t-email": "Электронная почта",
+  "t-password": "Пароль",
+  "t-please-enter-your-email": "Пожалуйста, введите вашу электронную почту",
+  "t-please-enter-a-password-of-at-least-8-characters": "Пожалуйста, введите пароль"
 }

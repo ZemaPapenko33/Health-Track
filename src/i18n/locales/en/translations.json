@@ -1,9 +1,14 @@
 {
-  "background": "background",
-  "Health Track": "Health Track",
-  "Welcome back": "Welcome back",
-  "Sign in": "Sign in",
-  "Sign in with Google": "Sign in with Google",
-  "Welcome": "Welcome",
-  "Register": "Register"
+  "t-background": "background",
+  "t-health-track": "Health Track",
+  "t-welcome-back": "Welcome back",
+  "t-sign-in": "Sign in",
+  "t-sign-in-with-Google": "Sign in with Google",
+  "t-welcome": "Welcome",
+  "t-register": "Register",
+  "t-or": "OR",
+  "t-email": "Email",
+  "t-password": "Password",
+  "t-please-enter-your-email": "Please enter your email",
+  "t-please-enter-a-password-of-at-least-8-characters": "Please enter a password of at least 8 characters"
 }
