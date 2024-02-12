@@ -10,5 +10,10 @@
   "t-email": "Электронная почта",
   "t-password": "Пароль",
   "t-please-enter-your-email": "Пожалуйста, введите вашу электронную почту",
-  "t-please-enter-a-password-of-at-least-8-characters": "Пожалуйста, введите пароль"
+  "t-please-enter-a-password-of-at-least-8-characters": "Пожалуйста, введите пароль",
+  "t-error-email-already-in-use": "Этот адрес электронной почты уже используется",
+  "t-error-weak-password": "Пароль должен быть длиной не менее 8 символов",
+  "t-error-invalid-email": "Проверьте, правильно ли вы ввели свой адрес электронной почты",
+  "t-error-missing-password": "Вы не ввели свой пароль",
+  "t-error-unknown": "Неизвестная ошибка:"
 }

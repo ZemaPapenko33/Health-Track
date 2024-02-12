@@ -10,5 +10,10 @@
   "t-email": "Email",
   "t-password": "Password",
   "t-please-enter-your-email": "Please enter your email",
-  "t-please-enter-a-password-of-at-least-8-characters": "Please enter a password of at least 8 characters"
+  "t-please-enter-a-password-of-at-least-8-characters": "Please enter a password of at least 8 characters",
+  "t-error-email-already-in-use": "This email is already in use",
+  "t-error-weak-password": "Password must be at least 8 characters long",
+  "t-error-invalid-email": "Check that you have entered your email correctly",
+  "t-error-missing-password": "You have not entered your password",
+  "t-error-unknown": "Unknown Error:"
 }
