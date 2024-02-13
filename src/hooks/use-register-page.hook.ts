@@ -38,6 +38,34 @@ function useRegisterPage(): RegisterPageHook {
 
   const passwordInputType = showPassword ? 'text' : 'password'
 
+  const handleError = (error: FirebaseError) => {
+    switch (error.code) {
+      case Errors.EMAIL_ALREADY_IN_USE:
+        setErrorMessage(t('t-error-email-already-in-use'))
+        setPasswordError(false)
+        setEmailError(true)
+        break
+      case Errors.WEAK_PASSWORD:
+        setErrorMessage(t('t-error-weak-password'))
+        setEmailError(false)
+        setPasswordError(true)
+        break
+      case Errors.INVALID_EMAIL:
+        setErrorMessage(t('t-error-invalid-email'))
+        setPasswordError(false)
+        setEmailError(true)
+        break
+      case Errors.MISSING_PASSWORD:
+        setErrorMessage(t('t-error-missing-password'))
+        setEmailError(false)
+        setPasswordError(true)
+        break
+      default:
+        setErrorMessage(t('t-error-unknown') + error.code)
+        break
+    }
+  }
+
   const formHandler = async (event: FormEvent): Promise<void> => {
     event.preventDefault()
     try {
@@ -53,31 +81,7 @@ function useRegisterPage(): RegisterPageHook {
       navigateTo(PageRoutes.PENDING_ROUTE)
     } catch (error) {
       const firebaseError = error as FirebaseError
-      switch (firebaseError.code) {
-        case Errors.EMAIL_ALREADY_IN_USE:
-          setErrorMessage(t('t-error-email-already-in-use'))
-          setPasswordError(false)
-          setEmailError(true)
-          break
-        case Errors.WEAK_PASSWORD:
-          setErrorMessage(t('t-error-weak-password'))
-          setEmailError(false)
-          setPasswordError(true)
-          break
-        case Errors.INVALID_EMAIL:
-          setErrorMessage(t('t-error-invalid-email'))
-          setPasswordError(false)
-          setEmailError(true)
-          break
-        case Errors.MISSING_PASSWORD:
-          setErrorMessage(t('t-error-missing-password'))
-          setEmailError(false)
-          setPasswordError(true)
-          break
-        default:
-          setErrorMessage(t('t-error-unknown') + firebaseError.code)
-          break
-      }
+      handleError(firebaseError)
     }
   }
 

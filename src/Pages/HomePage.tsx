@@ -1,17 +1,8 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { PageRoutes } from '../shared/enums'
+import React from 'react'
+import { useDefaultRedirect } from '../hooks/use-default-redirect.hook'
 
 const HomePage = (): JSX.Element => {
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    const user = localStorage.getItem('user')
-
-    if (!user) {
-      navigate(PageRoutes.LOGIN_ROUTE)
-    }
-  }, [navigate])
+  useDefaultRedirect()
 
   return <div>Home page</div>
 }

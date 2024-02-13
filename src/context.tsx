@@ -45,7 +45,7 @@ export const Provider: React.FC<ProviderProps> = ({ children }) => {
 
 export const useAppContext = (): TContext => {
   const context = useContext(AppContext)
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useForm must be used within a UseProvider')
   }
 

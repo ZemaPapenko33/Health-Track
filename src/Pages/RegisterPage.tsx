@@ -4,9 +4,7 @@ import { BgImage } from '../Components/BgImage/BgImageStyled'
 import FormForRegAndAuth from '../Components/FormForRegAndAuth/FormForRegAndAuth'
 import { useTranslation } from 'react-i18next'
 import useRegisterPage from '../hooks/use-register-page.hook'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { PageRoutes } from '../shared/enums'
+import { useDefaultRedirect } from '../hooks/use-default-redirect.hook'
 
 const RegisterPage = (): JSX.Element => {
   const { t } = useTranslation()
@@ -22,15 +20,7 @@ const RegisterPage = (): JSX.Element => {
     showPassword,
     passwordInputType
   } = useRegisterPage()
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    const user = localStorage.getItem('user')
-
-    if (user) {
-      navigate(PageRoutes.HOME_ROUTE)
-    }
-  }, [navigate])
+  useDefaultRedirect()
 
   return (
     <Stack width={`100vw`} flexDirection={`row`} height={`100vh`}>
