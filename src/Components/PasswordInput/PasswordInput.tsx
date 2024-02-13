@@ -1,8 +1,7 @@
 import React from 'react'
 import { PasswordInputWrapper } from './PasswordInputStyled'
 import { t } from 'i18next'
-import { IconButton, InputAdornment } from '@mui/material'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
+import VisibilityPassword from '../VisibilityPassword/VisibilityPassword'
 
 type TPasswordInput = {
   passwordError: boolean
@@ -32,11 +31,10 @@ const PasswordInput: React.FC<TPasswordInput> = ({
       error={passwordError}
       InputProps={{
         endAdornment: (
-          <InputAdornment position="end">
-            <IconButton onClick={showPasswordHandler}>
-              {showPassword ? <Visibility /> : <VisibilityOff />}
-            </IconButton>
-          </InputAdornment>
+          <VisibilityPassword
+            showPassword={showPassword}
+            showPasswordHandler={showPasswordHandler}
+          />
         )
       }}
       required

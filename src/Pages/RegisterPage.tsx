@@ -14,8 +14,6 @@ const RegisterPage = (): JSX.Element => {
     passwordInputHandler,
     showPasswordHandler,
     errorMessage,
-    emailInputHelperText,
-    passwordInputHelperText,
     showPassword,
     passwordInputType
   } = useRegisterPage()
@@ -36,8 +34,6 @@ const RegisterPage = (): JSX.Element => {
           passwordInputHandler={passwordInputHandler}
           showPassword={showPassword}
           showPasswordHandler={showPasswordHandler}
-          emailInputHelperText={emailInputHelperText}
-          passwordInputHelperText={passwordInputHelperText}
           passwordInputType={passwordInputType}
           errorMessage={errorMessage}
         />

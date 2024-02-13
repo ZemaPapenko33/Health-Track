@@ -7,8 +7,6 @@ import PasswordInput from '../PasswordInput/PasswordInput'
 interface IFormForRegAndAuth {
   keyText: string
   showPassword: boolean
-  emailInputHelperText: string
-  passwordInputHelperText: string
   passwordInputType: string
   errorMessage: TErrorMessage
   formHandler: (event: FormEvent) => Promise<void>
@@ -26,8 +24,6 @@ type TErrorMessage = {
 const FormForRegAndAuth: React.FC<IFormForRegAndAuth> = ({
   keyText,
   showPassword,
-  emailInputHelperText,
-  passwordInputHelperText,
   passwordInputType,
   errorMessage,
   formHandler,
@@ -39,7 +35,7 @@ const FormForRegAndAuth: React.FC<IFormForRegAndAuth> = ({
     <FormForRegAndAuthWrapper onSubmit={formHandler}>
       <EmailInput
         emailError={!!errorMessage.emailField}
-        emailInputHelperText={emailInputHelperText}
+        emailInputHelperText={errorMessage.emailField}
         emailInputHandler={emailInputHandler}
       />
       <PasswordInput
@@ -48,7 +44,7 @@ const FormForRegAndAuth: React.FC<IFormForRegAndAuth> = ({
         showPasswordHandler={showPasswordHandler}
         passwordInputHandler={passwordInputHandler}
         passwordInputType={passwordInputType}
-        passwordInputHelperText={passwordInputHelperText}
+        passwordInputHelperText={errorMessage.passwordField}
       />
       <Button variant="contained" type="submit">
         {keyText}

@@ -5,13 +5,10 @@ import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } 
 import { auth } from '../firebase/firebaseConfig'
 import { PageRoutes } from '../shared/enums'
 import { FirebaseError } from 'firebase/app'
-import { useTranslation } from 'react-i18next'
 import { handleError } from '../utils/handleError'
 
 type RegisterPageHook = {
   errorMessage: TErrorMessage
-  emailInputHelperText: string
-  passwordInputHelperText: string
   showPassword: boolean
   passwordInputType: string
   formHandler: (event: FormEvent) => Promise<void>
@@ -35,15 +32,6 @@ function useRegisterPage(): RegisterPageHook {
   })
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const navigateTo = useNavigate()
-  const { t } = useTranslation()
-
-  const emailInputHelperText = errorMessage.emailField
-    ? errorMessage.emailField
-    : t('t-please-enter-your-email')
-
-  const passwordInputHelperText = errorMessage.passwordField
-    ? errorMessage.passwordField
-    : t('t-please-enter-a-password-of-at-least-8-characters')
 
   const passwordInputType = showPassword ? 'text' : 'password'
 
@@ -77,8 +65,6 @@ function useRegisterPage(): RegisterPageHook {
     showPasswordHandler,
     errorMessage,
     showPassword,
-    emailInputHelperText,
-    passwordInputHelperText,
     passwordInputType
   }
 }

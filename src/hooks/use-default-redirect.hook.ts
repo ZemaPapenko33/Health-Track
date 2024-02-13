@@ -9,7 +9,7 @@ export function useDefaultRedirect() {
   useEffect(() => {
     if (user) {
       navigate(PageRoutes.HOME_ROUTE)
-    } else {
+    } else if (!user && location.pathname !== PageRoutes.REGISTER_ROUTE) {
       navigate(PageRoutes.LOGIN_ROUTE)
     }
   }, [user])
