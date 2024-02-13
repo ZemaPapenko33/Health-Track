@@ -13,8 +13,7 @@ const RegisterPage = (): JSX.Element => {
     emailInputHandler,
     passwordInputHandler,
     showPasswordHandler,
-    emailError,
-    passwordError,
+    errorMessage,
     emailInputHelperText,
     passwordInputHelperText,
     showPassword,
@@ -35,13 +34,12 @@ const RegisterPage = (): JSX.Element => {
           formHandler={formHandler}
           emailInputHandler={emailInputHandler}
           passwordInputHandler={passwordInputHandler}
-          emailError={emailError}
-          passwordError={passwordError}
           showPassword={showPassword}
           showPasswordHandler={showPasswordHandler}
           emailInputHelperText={emailInputHelperText}
           passwordInputHelperText={passwordInputHelperText}
           passwordInputType={passwordInputType}
+          errorMessage={errorMessage}
         />
       </Stack>
     </Stack>

@@ -6,26 +6,30 @@ import PasswordInput from '../PasswordInput/PasswordInput'
 
 interface IFormForRegAndAuth {
   keyText: string
-  emailError: boolean
-  passwordError: boolean
   showPassword: boolean
   emailInputHelperText: string
   passwordInputHelperText: string
   passwordInputType: string
+  errorMessage: TErrorMessage
   formHandler: (event: FormEvent) => Promise<void>
   emailInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
   passwordInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
   showPasswordHandler: VoidFunction
 }
 
+type TErrorMessage = {
+  passwordField: string
+  emailField: string
+  defaultError: string
+}
+
 const FormForRegAndAuth: React.FC<IFormForRegAndAuth> = ({
   keyText,
-  emailError,
-  passwordError,
   showPassword,
   emailInputHelperText,
   passwordInputHelperText,
   passwordInputType,
+  errorMessage,
   formHandler,
   emailInputHandler,
   passwordInputHandler,
@@ -34,12 +38,12 @@ const FormForRegAndAuth: React.FC<IFormForRegAndAuth> = ({
   return (
     <FormForRegAndAuthWrapper onSubmit={formHandler}>
       <EmailInput
-        emailError={emailError}
+        emailError={!!errorMessage.emailField}
         emailInputHelperText={emailInputHelperText}
         emailInputHandler={emailInputHandler}
       />
       <PasswordInput
-        passwordError={passwordError}
+        passwordError={!!errorMessage.passwordField}
         showPassword={showPassword}
         showPasswordHandler={showPasswordHandler}
         passwordInputHandler={passwordInputHandler}

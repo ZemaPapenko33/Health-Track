@@ -3,14 +3,13 @@ import { useAppContext } from '../context'
 import { FormEvent, useState } from 'react'
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth'
 import { auth } from '../firebase/firebaseConfig'
-import { Errors, PageRoutes } from '../shared/enums'
+import { PageRoutes } from '../shared/enums'
 import { FirebaseError } from 'firebase/app'
 import { useTranslation } from 'react-i18next'
+import { handleError } from '../utils/handleError'
 
 type RegisterPageHook = {
-  errorMessage: string
-  emailError: boolean
-  passwordError: boolean
+  errorMessage: TErrorMessage
   emailInputHelperText: string
   passwordInputHelperText: string
   showPassword: boolean
@@ -21,50 +20,32 @@ type RegisterPageHook = {
   showPasswordHandler: VoidFunction
 }
 
+type TErrorMessage = {
+  passwordField: string
+  emailField: string
+  defaultError: string
+}
+
 function useRegisterPage(): RegisterPageHook {
   const { email, password, emailInputHandler, passwordInputHandler } = useAppContext()
-  const [errorMessage, setErrorMessage] = useState<string>('')
-  const [emailError, setEmailError] = useState<boolean>(false)
-  const [passwordError, setPasswordError] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<TErrorMessage>({
+    passwordField: '',
+    emailField: '',
+    defaultError: ''
+  })
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const navigateTo = useNavigate()
   const { t } = useTranslation()
 
-  const emailInputHelperText = emailError ? errorMessage : t('t-please-enter-your-email')
+  const emailInputHelperText = errorMessage.emailField
+    ? errorMessage.emailField
+    : t('t-please-enter-your-email')
 
-  const passwordInputHelperText = passwordError
-    ? errorMessage
+  const passwordInputHelperText = errorMessage.passwordField
+    ? errorMessage.passwordField
     : t('t-please-enter-a-password-of-at-least-8-characters')
 
   const passwordInputType = showPassword ? 'text' : 'password'
-
-  const handleError = (error: FirebaseError) => {
-    switch (error.code) {
-      case Errors.EMAIL_ALREADY_IN_USE:
-        setErrorMessage(t('t-error-email-already-in-use'))
-        setPasswordError(false)
-        setEmailError(true)
-        break
-      case Errors.WEAK_PASSWORD:
-        setErrorMessage(t('t-error-weak-password'))
-        setEmailError(false)
-        setPasswordError(true)
-        break
-      case Errors.INVALID_EMAIL:
-        setErrorMessage(t('t-error-invalid-email'))
-        setPasswordError(false)
-        setEmailError(true)
-        break
-      case Errors.MISSING_PASSWORD:
-        setErrorMessage(t('t-error-missing-password'))
-        setEmailError(false)
-        setPasswordError(true)
-        break
-      default:
-        setErrorMessage(t('t-error-unknown') + error.code)
-        break
-    }
-  }
 
   const formHandler = async (event: FormEvent): Promise<void> => {
     event.preventDefault()
@@ -81,7 +62,7 @@ function useRegisterPage(): RegisterPageHook {
       navigateTo(PageRoutes.PENDING_ROUTE)
     } catch (error) {
       const firebaseError = error as FirebaseError
-      handleError(firebaseError)
+      handleError(firebaseError, setErrorMessage, errorMessage)
     }
   }
 
@@ -95,8 +76,6 @@ function useRegisterPage(): RegisterPageHook {
     passwordInputHandler,
     showPasswordHandler,
     errorMessage,
-    emailError,
-    passwordError,
     showPassword,
     emailInputHelperText,
     passwordInputHelperText,
