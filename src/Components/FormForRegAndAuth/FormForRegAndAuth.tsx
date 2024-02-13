@@ -1,38 +1,54 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
 import { FormForRegAndAuthWrapper } from './FormForRegAndAuthStyled'
 import { Button } from '@mui/material'
-import { EmailInputWrapper } from '../EmailInput/EmailInputStyled'
-import { useTranslation } from 'react-i18next'
-import { PasswordInputWrapper } from '../PasswordInput/PasswordInputStyled'
+import EmailInput from '../EmailInput/EmailInput'
+import PasswordInput from '../PasswordInput/PasswordInput'
 
 interface IFormForRegAndAuth {
   keyText: string
+  showPassword: boolean
+  passwordInputType: string
+  errorMessage: TErrorMessage
+  formHandler: (event: FormEvent) => Promise<void>
+  emailInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
+  passwordInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
+  showPasswordHandler: VoidFunction
 }
 
-const FormForRegAndAuth: React.FC<IFormForRegAndAuth> = ({ keyText }) => {
-  const { t } = useTranslation()
+type TErrorMessage = {
+  passwordField: string
+  emailField: string
+  defaultError: string
+}
 
+const FormForRegAndAuth: React.FC<IFormForRegAndAuth> = ({
+  keyText,
+  showPassword,
+  passwordInputType,
+  errorMessage,
+  formHandler,
+  emailInputHandler,
+  passwordInputHandler,
+  showPasswordHandler
+}) => {
   return (
-    <FormForRegAndAuthWrapper>
-      <EmailInputWrapper
-        helperText={t('t-please-enter-your-email')}
-        label={t('t-email')}
-        type="Email"
-        variant="standard"
-        margin="dense"
-        size="medium"
-        required
+    <FormForRegAndAuthWrapper onSubmit={formHandler}>
+      <EmailInput
+        emailError={!!errorMessage.emailField}
+        emailInputHelperText={errorMessage.emailField}
+        emailInputHandler={emailInputHandler}
       />
-      <PasswordInputWrapper
-        helperText={t('t-please-enter-a-password-of-at-least-8-characters')}
-        label={t('t-password')}
-        type="Password"
-        variant="standard"
-        margin="normal"
-        size="medium"
-        required
+      <PasswordInput
+        passwordError={!!errorMessage.passwordField}
+        showPassword={showPassword}
+        showPasswordHandler={showPasswordHandler}
+        passwordInputHandler={passwordInputHandler}
+        passwordInputType={passwordInputType}
+        passwordInputHelperText={errorMessage.passwordField}
       />
-      <Button variant="contained">{keyText}</Button>
+      <Button variant="contained" type="submit">
+        {keyText}
+      </Button>
     </FormForRegAndAuthWrapper>
   )
 }
