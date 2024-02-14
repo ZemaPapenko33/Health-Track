@@ -46,6 +46,7 @@ const FormForRegAndAuth: React.FC<IFormForRegAndAuth> = ({
         passwordInputType={passwordInputType}
         passwordInputHelperText={errorMessage.passwordField}
       />
+
       <Button variant="contained" type="submit">
         {keyText}
       </Button>

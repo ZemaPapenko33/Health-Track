@@ -5,9 +5,10 @@ import { BackButtonWrapper } from '../BackButton/BackButtonStyled'
 
 type Props = {
   email: string
+  backButtonHandler: VoidFunction
 }
 
-const PendingForm = ({ email }: Props) => {
+const PendingForm: React.FC<Props> = ({ email, backButtonHandler }) => {
   return (
     <PendingFormWrapper>
       <Typography variant="h3" color="white">
@@ -17,7 +18,9 @@ const PendingForm = ({ email }: Props) => {
         An email {email} with a confirmation link has been sent to your email. If you have entered
         the wrong e-mail address, please go back to it
       </Typography>
-      <BackButtonWrapper variant="contained">Go back</BackButtonWrapper>
+      <BackButtonWrapper variant="contained" onClick={backButtonHandler}>
+        Go back
+      </BackButtonWrapper>
     </PendingFormWrapper>
   )
 }
