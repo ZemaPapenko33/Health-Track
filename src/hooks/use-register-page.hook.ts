@@ -47,6 +47,7 @@ function useRegisterPage(): RegisterPageHook {
       }
       localStorage.setItem('user', userCredential.user.displayName!)
       localStorage.setItem('email', email)
+      localStorage.setItem('registration', userCredential.operationType)
       navigateTo(PageRoutes.PENDING_ROUTE)
     } catch (error) {
       const firebaseError = error as FirebaseError
