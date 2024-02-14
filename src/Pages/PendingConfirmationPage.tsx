@@ -20,6 +20,7 @@ const PendingConfirmationPage = () => {
       auth.currentUser?.reload().then(() => {
         if (auth.currentUser?.emailVerified) {
           navigate(PageRoutes.HOME_ROUTE)
+          localStorage.removeItem('registration')
         }
       })
     }, 5000)
