@@ -3,12 +3,10 @@ import { PageRoutes } from '../shared/enums'
 import { auth } from '../firebase/firebaseConfig'
 
 type PendingPageHook = {
-  email: string
   backButtonHandler: VoidFunction
 }
 
 function usePendingPage(): PendingPageHook {
-  const email = localStorage.getItem('email')!
   const navigate = useNavigate()
 
   const backButtonHandler = () => {
@@ -17,7 +15,7 @@ function usePendingPage(): PendingPageHook {
     navigate(PageRoutes.REGISTER_ROUTE)
   }
 
-  return { email, backButtonHandler }
+  return { backButtonHandler }
 }
 
 export default usePendingPage

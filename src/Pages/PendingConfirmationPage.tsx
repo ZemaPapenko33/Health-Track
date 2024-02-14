@@ -11,7 +11,7 @@ import { PageRoutes } from '../shared/enums'
 import { useNavigate } from 'react-router-dom'
 
 const PendingConfirmationPage = () => {
-  const { email, backButtonHandler } = usePendingPage()
+  const { backButtonHandler } = usePendingPage()
   const navigate = useNavigate()
   useDefaultRedirect()
 
@@ -22,7 +22,7 @@ const PendingConfirmationPage = () => {
           navigate(PageRoutes.HOME_ROUTE)
         }
       })
-    }, 2000)
+    }, 5000)
 
     return () => clearInterval(checkEmailVerified)
   }, [navigate])
@@ -36,7 +36,7 @@ const PendingConfirmationPage = () => {
       alignItems={'center'}
     >
       <ImageForPending src={background} alt={t('t-background')} />
-      <PendingForm email={email!} backButtonHandler={backButtonHandler} />
+      <PendingForm backButtonHandler={backButtonHandler} />
     </Stack>
   )
 }

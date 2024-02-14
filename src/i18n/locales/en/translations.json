@@ -15,5 +15,7 @@
   "t-error-weak-password": "Password must be at least 8 characters long",
   "t-error-invalid-email": "Check that you have entered your email correctly",
   "t-error-missing-password": "You have not entered your password",
-  "t-error-unknown": "Unknown Error:"
+  "t-error-unknown": "Unknown Error:",
+  "t-e-notification": "An email  with a confirmation link has been sent to your email. If you have entered the wrong e-mail address, please go back to it",
+  "t-back": " go back"
 }
