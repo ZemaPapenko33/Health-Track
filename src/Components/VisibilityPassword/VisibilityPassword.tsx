@@ -1,10 +1,6 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { IconButton, InputAdornment } from '@mui/material'
-
-type TVisibilityPassword = {
-  showPassword: boolean
-  showPasswordHandler: VoidFunction
-}
+import { TVisibilityPassword } from '../../Types/ComponentTypes'
 
 const VisibilityPassword: React.FC<TVisibilityPassword> = ({
   showPassword,

@@ -1,12 +1,8 @@
 import { FirebaseError } from 'firebase/app'
 import { t } from 'i18next'
 import { Errors } from '../shared/enums'
+import { TErrorMessage } from '../Types/ErrorTypes'
 
-type TErrorMessage = {
-  passwordField: string
-  emailField: string
-  defaultError: string
-}
 export const handleError = (
   error: FirebaseError,
   setErrorMessage: React.Dispatch<React.SetStateAction<TErrorMessage>>,

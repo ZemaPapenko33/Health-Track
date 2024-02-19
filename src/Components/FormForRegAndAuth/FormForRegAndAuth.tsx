@@ -1,25 +1,9 @@
-import React, { FormEvent } from 'react'
+import React from 'react'
 import { FormForRegAndAuthWrapper } from './FormForRegAndAuthStyled'
 import { Button } from '@mui/material'
 import EmailInput from '../EmailInput/EmailInput'
 import PasswordInput from '../PasswordInput/PasswordInput'
-
-interface IFormForRegAndAuth {
-  keyText: string
-  showPassword: boolean
-  passwordInputType: string
-  errorMessage: TErrorMessage
-  formHandler: (event: FormEvent) => Promise<void>
-  emailInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
-  passwordInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
-  showPasswordHandler: VoidFunction
-}
-
-type TErrorMessage = {
-  passwordField: string
-  emailField: string
-  defaultError: string
-}
+import { IFormForRegAndAuth } from '../../Types/ComponentTypes'
 
 const FormForRegAndAuth: React.FC<IFormForRegAndAuth> = ({
   keyText,

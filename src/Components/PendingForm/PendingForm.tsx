@@ -3,12 +3,9 @@ import { PendingFormWrapper } from './PendingFormStyled'
 import { Typography } from '@mui/material'
 import { BackButtonWrapper } from '../BackButton/BackButtonStyled'
 import { t } from 'i18next'
+import { TPendingForm } from '../../Types/ComponentTypes'
 
-type Props = {
-  backButtonHandler: VoidFunction
-}
-
-const PendingForm: React.FC<Props> = ({ backButtonHandler }) => {
+const PendingForm: React.FC<TPendingForm> = ({ backButtonHandler }) => {
   return (
     <PendingFormWrapper>
       <Typography variant="h3" color="white">

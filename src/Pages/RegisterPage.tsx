@@ -1,10 +1,10 @@
 import { Box, Stack, Typography } from '@mui/material'
-import imgBack from '../assets/HealthBack.png'
+import { useTranslation } from 'react-i18next'
 import { BgImage } from '../Components/BgImage/BgImageStyled'
 import FormForRegAndAuth from '../Components/FormForRegAndAuth/FormForRegAndAuth'
-import { useTranslation } from 'react-i18next'
 import useRegisterPage from '../hooks/use-register-page.hook'
 import { useDefaultRedirect } from '../hooks/use-default-redirect.hook'
+import imgBack from '../assets/HealthBack.png'
 
 const RegisterPage = (): JSX.Element => {
   const { t } = useTranslation()

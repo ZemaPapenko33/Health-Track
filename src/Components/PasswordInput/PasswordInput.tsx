@@ -2,15 +2,7 @@ import React from 'react'
 import { PasswordInputWrapper } from './PasswordInputStyled'
 import { t } from 'i18next'
 import VisibilityPassword from '../VisibilityPassword/VisibilityPassword'
-
-type TPasswordInput = {
-  passwordError: boolean
-  showPassword: boolean
-  passwordInputHelperText: string
-  passwordInputType: string
-  passwordInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
-  showPasswordHandler: VoidFunction
-}
+import { TPasswordInput } from '../../Types/ComponentTypes'
 
 const PasswordInput: React.FC<TPasswordInput> = ({
   passwordInputHandler,

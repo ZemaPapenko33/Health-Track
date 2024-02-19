@@ -1,16 +1,16 @@
 import { Stack } from '@mui/material'
-import background from '../assets/backgroundPending.png'
-import { ImageForPending } from '../Components/ImageForPending/ImageForPendingStyled'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { t } from 'i18next'
+import { ImageForPending } from '../Components/ImageForPending/ImageForPendingStyled'
 import PendingForm from '../Components/PendingForm/PendingForm'
 import usePendingPage from '../hooks/use-pending-page.hook'
 import { useDefaultRedirect } from '../hooks/use-default-redirect.hook'
+import background from '../assets/backgroundPending.png'
 import { auth } from '../firebase/firebaseConfig'
-import { useEffect } from 'react'
 import { PageRoutes } from '../shared/enums'
-import { useNavigate } from 'react-router-dom'
 
-const PendingConfirmationPage = () => {
+const PendingConfirmationPage = (): JSX.Element => {
   const { backButtonHandler } = usePendingPage()
   const navigate = useNavigate()
   useDefaultRedirect()
