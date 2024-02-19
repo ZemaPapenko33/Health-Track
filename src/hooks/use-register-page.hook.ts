@@ -6,6 +6,7 @@ import { auth } from '../firebase/firebaseConfig'
 import { PageRoutes } from '../shared/enums'
 import { FirebaseError } from 'firebase/app'
 import { handleError } from '../utils/handleError'
+import { TErrorMessage } from '../Types/ErrorTypes'
 
 type RegisterPageHook = {
   errorMessage: TErrorMessage
@@ -15,12 +16,6 @@ type RegisterPageHook = {
   emailInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
   passwordInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
   showPasswordHandler: VoidFunction
-}
-
-type TErrorMessage = {
-  passwordField: string
-  emailField: string
-  defaultError: string
 }
 
 function useRegisterPage(): RegisterPageHook {
@@ -52,6 +47,7 @@ function useRegisterPage(): RegisterPageHook {
     } catch (error) {
       const firebaseError = error as FirebaseError
       handleError(firebaseError, setErrorMessage, errorMessage)
+      return
     }
   }
 

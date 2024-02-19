@@ -5,6 +5,7 @@ import LoginPage from '../Pages/LoginPage'
 import RegisterPage from '../Pages/RegisterPage'
 import { PageRoutes } from '../shared/enums'
 import PendingConfirmationPage from '../Pages/PendingConfirmationPage'
+import ProfilePage from '../Pages/ProfilePage'
 
 const Routers = () => {
   return (
@@ -13,6 +14,7 @@ const Routers = () => {
       <Route path={PageRoutes.LOGIN_ROUTE} element={<LoginPage />} />
       <Route path={PageRoutes.REGISTER_ROUTE} element={<RegisterPage />} />
       <Route path={PageRoutes.PENDING_ROUTE} element={<PendingConfirmationPage />} />
+      <Route path={PageRoutes.PROFILE_ROUTE} element={<ProfilePage />} />
     </Routes>
   )
 }

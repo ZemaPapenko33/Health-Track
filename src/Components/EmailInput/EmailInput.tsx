@@ -1,12 +1,7 @@
 import React from 'react'
 import { EmailInputWrapper } from './EmailInputStyled'
 import { t } from 'i18next'
-
-type TEmailInput = {
-  emailError: boolean
-  emailInputHelperText: string
-  emailInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
-}
+import { TEmailInput } from '../../Types/ComponentTypes'
 
 const EmailInput: React.FC<TEmailInput> = ({
   emailInputHelperText,

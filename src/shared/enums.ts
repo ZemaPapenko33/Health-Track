@@ -2,7 +2,8 @@ export enum PageRoutes {
   LOGIN_ROUTE = '/login',
   REGISTER_ROUTE = '/register',
   HOME_ROUTE = '/',
-  PENDING_ROUTE = '/pending'
+  PENDING_ROUTE = '/pending',
+  PROFILE_ROUTE = '/profile'
 }
 
 export enum Errors {

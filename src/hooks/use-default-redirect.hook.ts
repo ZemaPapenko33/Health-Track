@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { PageRoutes } from '../shared/enums'
 
 export function useDefaultRedirect() {
   const navigate = useNavigate()
+  const location = useLocation()
   const user = localStorage.getItem('user')
   const registration = localStorage.getItem('registration')
 
@@ -15,5 +16,5 @@ export function useDefaultRedirect() {
     } else if (location.pathname === PageRoutes.PENDING_ROUTE && !registration) {
       navigate(PageRoutes.LOGIN_ROUTE)
     }
-  }, [user])
+  }, [user, registration, navigate, location.pathname])
 }
