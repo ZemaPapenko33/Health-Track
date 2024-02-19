@@ -2,13 +2,13 @@ import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 
 const app = initializeApp({
-  apiKey: 'AIzaSyCXhTgQWS2SkrisOFkWQAVRFio25Zcqmhc',
-  authDomain: 'health-track-228fa.firebaseapp.com',
-  projectId: 'health-track-228fa',
-  storageBucket: 'health-track-228fa.appspot.com',
-  messagingSenderId: '51384979539',
-  appId: '1:51384979539:web:61b028285a655b1f44b6a6',
-  measurementId: 'G-RPTR31L71P'
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 })
 
 export const auth = getAuth(app)
