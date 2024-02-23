@@ -19,8 +19,7 @@ const PendingConfirmationPage = (): JSX.Element => {
     const checkEmailVerified = setInterval(() => {
       auth.currentUser?.reload().then(() => {
         if (auth.currentUser?.emailVerified) {
-          navigate(PageRoutes.HOME_ROUTE)
-          localStorage.removeItem('registration')
+          navigate(PageRoutes.PROFILE_ROUTE)
         }
       })
     }, 5000)

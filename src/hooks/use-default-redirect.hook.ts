@@ -7,14 +7,33 @@ export function useDefaultRedirect() {
   const location = useLocation()
   const user = localStorage.getItem('user')
   const registration = localStorage.getItem('registration')
+  const userAuth = localStorage.getItem('userAuth')
 
   useEffect(() => {
-    if (user && !registration) {
-      navigate(PageRoutes.HOME_ROUTE)
-    } else if (!user && location.pathname !== PageRoutes.REGISTER_ROUTE) {
-      navigate(PageRoutes.LOGIN_ROUTE)
-    } else if (location.pathname === PageRoutes.PENDING_ROUTE && !registration) {
-      navigate(PageRoutes.LOGIN_ROUTE)
+    switch (location.pathname) {
+      case PageRoutes.HOME_ROUTE:
+        if (!userAuth) navigate(PageRoutes.LOGIN_ROUTE)
+        break
+      case PageRoutes.LOGIN_ROUTE:
+        if (userAuth) navigate(PageRoutes.HOME_ROUTE)
+        break
+      case PageRoutes.REGISTER_ROUTE:
+        if (userAuth) navigate(PageRoutes.HOME_ROUTE)
+        break
+      case PageRoutes.PENDING_ROUTE:
+        if (!user && !registration) {
+          navigate(PageRoutes.LOGIN_ROUTE)
+        } else if (userAuth) {
+          navigate(PageRoutes.HOME_ROUTE)
+        }
+        break
+      case PageRoutes.PROFILE_ROUTE:
+        if (!userAuth && !registration) {
+          navigate(PageRoutes.LOGIN_ROUTE)
+        } else if (userAuth) {
+          navigate(PageRoutes.HOME_ROUTE)
+        }
+        break
     }
-  }, [user, registration, navigate, location.pathname])
+  }, [user, registration, navigate, location.pathname, userAuth])
 }
