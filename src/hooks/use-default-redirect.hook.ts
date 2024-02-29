@@ -12,7 +12,11 @@ export function useDefaultRedirect() {
   useEffect(() => {
     switch (location.pathname) {
       case PageRoutes.HOME_ROUTE:
-        if (!userAuth) navigate(PageRoutes.LOGIN_ROUTE)
+        if (!userAuth && !registration) {
+          navigate(PageRoutes.LOGIN_ROUTE)
+        } else if (registration) {
+          navigate(PageRoutes.PROFILE_ROUTE)
+        }
         break
       case PageRoutes.LOGIN_ROUTE:
         if (userAuth) navigate(PageRoutes.HOME_ROUTE)

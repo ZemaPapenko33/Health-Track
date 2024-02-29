@@ -47,6 +47,8 @@ export type TAgeAndGender = {
   userInfo: UserInfo
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleSelectChange: (event: SelectChangeEvent<string>) => void
+  ageValue: number | ''
+  handleKeyDown: (event: React.KeyboardEvent) => void
 }
 
 export type TActivity = {
@@ -60,4 +62,28 @@ export type TGoal = {
 
 export type TNotice = {
   handleCheckboxChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export type StepSwitchProps = {
+  children: Array<JSX.Element>
+  step: number
+}
+
+export type TStepSwitch = {
+  userInfo: UserInfo
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleSelectChange: (event: SelectChangeEvent<string>) => void
+  handleCheckboxChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleKeyDown: (event: React.KeyboardEvent) => void
+  step: number
+  ageValue: number | ''
+  heightValue: number | ''
+  weightValue: number | ''
+}
+
+export type THAWBlock = {
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleKeyDown: (event: React.KeyboardEvent) => void
+  heightValue: number | ''
+  weightValue: number | ''
 }

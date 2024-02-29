@@ -1,7 +1,8 @@
 import { FirebaseError } from 'firebase/app'
 import { t } from 'i18next'
-import { Errors } from '../shared/enums'
+import { Errors, Gender } from '../shared/enums'
 import { TErrorMessage } from '../Types/ErrorTypes'
+import { UserInfo } from '../Types/UserTypes'
 
 export const handleError = (
   error: FirebaseError,
@@ -27,4 +28,21 @@ export const handleError = (
       break
   }
   setErrorMessage(newErrorMessage)
+}
+
+export function isStepValid(step: number, userInfo: UserInfo) {
+  switch (step) {
+    case 0:
+      return userInfo.name !== '' && userInfo.surname !== ''
+    case 1:
+      return userInfo.age !== 0 && userInfo.gender !== Gender.DEFAULT
+    case 2:
+      return userInfo.height !== 0 && userInfo.weight !== 0
+    case 3:
+      return userInfo.activity !== ''
+    case 4:
+      return userInfo.goal !== ''
+    default:
+      return false
+  }
 }

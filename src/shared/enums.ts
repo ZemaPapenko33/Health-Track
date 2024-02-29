@@ -13,3 +13,9 @@ export enum Errors {
   INVALID_LOGIN_CREDENTIAL = 'auth/invalid-login-credentials',
   WEAK_PASSWORD = 'auth/weak-password'
 }
+
+export enum Gender {
+  MALE = 'Male',
+  FEMALE = 'FEMALE',
+  DEFAULT = ''
+}
