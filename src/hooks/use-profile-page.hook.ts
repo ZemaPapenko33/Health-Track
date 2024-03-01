@@ -47,7 +47,8 @@ function useProfilePage(): ProfilePageHook {
     1: userInfo.age !== 0 && userInfo.gender !== Gender.DEFAULT,
     2: userInfo.height !== 0 && userInfo.weight !== 0,
     3: userInfo.activity !== '',
-    4: userInfo.goal !== ''
+    4: userInfo.goal !== '',
+    5: true
   }
   const steps = [
     t('t-full-name'),

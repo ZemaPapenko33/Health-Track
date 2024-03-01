@@ -7,9 +7,21 @@ import { useTranslation } from 'react-i18next'
 import { useDefaultRedirect } from '../hooks/use-default-redirect.hook'
 import { Link } from 'react-router-dom'
 import { PageRoutes } from '../shared/enums'
+import FormForRegAndAuth from '../Components/FormForRegAndAuth/FormForRegAndAuth'
+import useAuthPage from '../hooks/use-auth-page.hook'
 
 const LoginPage = (): JSX.Element => {
   const { t } = useTranslation()
+  const {
+    passwordInputType,
+    errorMessage,
+    showPassword,
+    passwordInputHandler,
+    emailInputHandler,
+    showPasswordHandler,
+    formHandler,
+    googleHandler
+  } = useAuthPage()
   const theme = useTheme()
   useDefaultRedirect()
 
@@ -21,8 +33,18 @@ const LoginPage = (): JSX.Element => {
       <Stack width={`50%`} alignItems={'center'} justifyContent={'center'}>
         <Typography variant="h2">{t('t-health-track')}</Typography>
         <Typography variant="subtitle1">{t('t-welcome-back')}</Typography>
+        <FormForRegAndAuth
+          keyText={t('t-sign-in')}
+          formHandler={formHandler}
+          emailInputHandler={emailInputHandler}
+          passwordInputHandler={passwordInputHandler}
+          showPassword={showPassword}
+          showPasswordHandler={showPasswordHandler}
+          passwordInputType={passwordInputType}
+          errorMessage={errorMessage}
+        />
         <SeparationBox />
-        <Button variant="outlined">
+        <Button variant="outlined" onClick={googleHandler}>
           <Stack gap={1} flexDirection={'row'}>
             <GoogleIcon />
             <Typography>{t('t-sign-in-with-Google')}</Typography>
