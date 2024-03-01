@@ -1,13 +1,16 @@
 import imgBack from '../assets/HealthBack.png'
 import GoogleIcon from '@mui/icons-material/Google'
-import { Box, Button, Stack, Typography } from '@mui/material'
+import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
 import { BgImage } from '../Components/BgImage/BgImageStyled'
 import SeparationBox from '../Components/SeparationBox/SeparationBox'
 import { useTranslation } from 'react-i18next'
 import { useDefaultRedirect } from '../hooks/use-default-redirect.hook'
+import { Link } from 'react-router-dom'
+import { PageRoutes } from '../shared/enums'
 
 const LoginPage = (): JSX.Element => {
   const { t } = useTranslation()
+  const theme = useTheme()
   useDefaultRedirect()
 
   return (
@@ -25,6 +28,14 @@ const LoginPage = (): JSX.Element => {
             <Typography>{t('t-sign-in-with-Google')}</Typography>
           </Stack>
         </Button>
+        <Stack paddingTop={'1rem'}>
+          <Typography variant="caption">
+            {t('t-no-account')}
+            <Link to={PageRoutes.REGISTER_ROUTE} style={{ color: theme.palette.blackGrey.main }}>
+              {'\t' + t('t-register')}
+            </Link>
+          </Typography>
+        </Stack>
       </Stack>
     </Stack>
   )

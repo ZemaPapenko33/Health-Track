@@ -9,7 +9,7 @@ const PendingForm: React.FC<TPendingForm> = ({ backButtonHandler }) => {
   return (
     <PendingFormWrapper>
       <Typography variant="h3" color="white">
-        Confirm your e-mail
+        {t('t-confirm')}
       </Typography>
       <Typography variant="h6">{t('t-e-notification')}</Typography>
       <BackButtonWrapper variant="contained" onClick={backButtonHandler}>
