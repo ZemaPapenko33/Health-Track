@@ -22,9 +22,10 @@ type ProfilePageHook = {
   handleFinish: () => Promise<void>
   buttonText: string
   buttonAction: VoidFunction
-  ageValue: number | ''
-  heightValue: number | ''
-  weightValue: number | ''
+  ageValue: number | string
+  heightValue: number | string
+  weightValue: number | string
+  isStepValid: { [key: number]: boolean }
 }
 
 function useProfilePage(): ProfilePageHook {
@@ -41,6 +42,13 @@ function useProfilePage(): ProfilePageHook {
     weight: 0,
     notices: false
   })
+  const isStepValid = {
+    0: userInfo.name !== '' && userInfo.surname !== '',
+    1: userInfo.age !== 0 && userInfo.gender !== Gender.DEFAULT,
+    2: userInfo.height !== 0 && userInfo.weight !== 0,
+    3: userInfo.activity !== '',
+    4: userInfo.goal !== ''
+  }
   const steps = [
     t('t-full-name'),
     t('t-gender-and-age'),
@@ -115,6 +123,7 @@ function useProfilePage(): ProfilePageHook {
     ageValue,
     heightValue,
     weightValue,
+    isStepValid,
     setActiveStep,
     setUserInfo,
     handleNext,

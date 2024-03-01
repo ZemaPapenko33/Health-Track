@@ -3,7 +3,6 @@ import useProfilePage from '../hooks/use-profile-page.hook'
 import { useDefaultRedirect } from '../hooks/use-default-redirect.hook'
 import FormSteps from '../Components/StepSwitch/FormSteps'
 import { t } from 'i18next'
-import { isStepValid } from '../utils/handleError'
 
 const ProfilePage = () => {
   const {
@@ -14,6 +13,7 @@ const ProfilePage = () => {
     ageValue,
     heightValue,
     weightValue,
+    isStepValid,
     handleBack,
     handleInputChange,
     handleSelectChange,
@@ -55,11 +55,7 @@ const ProfilePage = () => {
         <Button disabled={!activeStep} onClick={handleBack}>
           {t('t-back-step')}
         </Button>
-        <Button
-          variant="contained"
-          onClick={buttonAction}
-          disabled={!isStepValid(activeStep, userInfo)}
-        >
+        <Button variant="contained" onClick={buttonAction} disabled={!isStepValid[activeStep]}>
           {buttonText}
         </Button>
       </Stack>

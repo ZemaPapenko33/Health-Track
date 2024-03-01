@@ -19,8 +19,6 @@ export function useDefaultRedirect() {
         }
         break
       case PageRoutes.LOGIN_ROUTE:
-        if (userAuth) navigate(PageRoutes.HOME_ROUTE)
-        break
       case PageRoutes.REGISTER_ROUTE:
         if (userAuth) navigate(PageRoutes.HOME_ROUTE)
         break
