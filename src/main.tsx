@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
-import { Provider } from './context'
+import { store } from './store'
+import { MyProvider } from './context'
+import { Provider } from 'react-redux'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
-    <Provider>
-      <App />
-    </Provider>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <MyProvider>
+        <App />
+      </MyProvider>
+    </BrowserRouter>
+  </Provider>
 )

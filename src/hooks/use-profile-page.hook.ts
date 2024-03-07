@@ -100,9 +100,9 @@ function useProfilePage(): ProfilePageHook {
       gender: userInfo.gender,
       activity: userInfo.activity,
       goal: userInfo.goal,
-      growth: userInfo.height,
+      height: userInfo.height,
       weight: userInfo.weight,
-      notice: userInfo.notices,
+      notices: userInfo.notices,
       email: email
     })
   }

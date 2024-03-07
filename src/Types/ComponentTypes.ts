@@ -87,3 +87,11 @@ export type THAWBlock = {
   heightValue: number | string
   weightValue: number | string
 }
+
+export type THeader = {
+  avatarText: string
+  handleClose: VoidFunction
+  open: boolean
+  handleClick: (event: React.MouseEvent<HTMLElement>) => void
+  anchorEl: null | HTMLElement
+}
