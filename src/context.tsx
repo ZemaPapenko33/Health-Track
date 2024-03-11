@@ -15,7 +15,7 @@ type ProviderProps = {
 
 const AppContext = createContext<TContext | undefined>(undefined)
 
-export const MyProvider: React.FC<ProviderProps> = ({ children }) => {
+export const BasicProvider: React.FC<ProviderProps> = ({ children }) => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
