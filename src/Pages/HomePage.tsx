@@ -20,7 +20,6 @@ const HomePage = (): JSX.Element => {
       />
       <Stack flexDirection={'row'}>
         <Sidebar />
-        <Stack></Stack>
       </Stack>
     </Stack>
   )

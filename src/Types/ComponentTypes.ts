@@ -93,5 +93,5 @@ export type THeader = {
   handleClose: VoidFunction
   open: boolean
   handleClick: (event: React.MouseEvent<HTMLElement>) => void
-  anchorEl: null | HTMLElement
+  anchorEl: HTMLElement | null
 }

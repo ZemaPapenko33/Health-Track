@@ -1,6 +1,6 @@
 import { AppBar, Avatar, Box, Menu, MenuItem, Stack, Toolbar, Typography } from '@mui/material'
 import LogoutIcon from '@mui/icons-material/Logout'
-import Logo from '../assets/HealthLogo.png'
+import Logo from '../../assets/HealthLogo.png'
 import { LogoWrapper } from '../Logo/LogoStyled'
 import { THeader } from '../../Types/ComponentTypes'
 
@@ -11,7 +11,7 @@ const Header: React.FC<THeader> = ({ handleClick, avatarText, anchorEl, open, ha
         <Stack width={'5%'}>
           <LogoWrapper src={Logo} />
         </Stack>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h4" sx={{ flexGrow: 1 }}>
           Health Track
         </Typography>
         <Box>

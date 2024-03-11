@@ -11,59 +11,69 @@ import MonitorHeartOutlinedIcon from '@mui/icons-material/MonitorHeartOutlined'
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined'
 import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined'
 import { Stack } from '@mui/material'
+import { t } from 'i18next'
 
 const Sidebar = () => {
   return (
     <Stack
-      width={'7%'}
+      width={'5%'}
       height={'100%'}
-      padding={'2rem'}
+      paddingTop={'0.5rem'}
       justifyContent={'flex-end'}
       overflow={'auto'}
     >
-      <Stack gap={0.25} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
+      <Stack
+        width={'100%'}
+        height={'50px'}
+        marginBottom={'0.5rem'}
+        justifyContent={'center'}
+        alignItems={'center'}
+        style={{ background: 'green' }}
+        borderRadius={'0 30px 30px 0'}
+        paddingRight={'10px'}
+      >
         <AssignmentIndOutlinedIcon />
-        Profile
+        {t('t-profile')}
       </Stack>
-      <Stack gap={0.25} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
+      <Stack gap={0.5} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
         <RestaurantOutlinedIcon />
-        Food
+        {t('t-food')}
       </Stack>
-      <Stack gap={0.25} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
+      <Stack gap={0.5} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
         <LocalDrinkOutlinedIcon />
-        Water
+        {t('t-water')}
       </Stack>
-      <Stack gap={0.25} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
+      <Stack gap={0.5} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
         <FitnessCenterOutlinedIcon />
-        Fitness
+        {t('t-fitness')}
       </Stack>
-      <Stack gap={0.25} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
+      <Stack gap={0.5} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
         <MonitorWeightOutlinedIcon />
-        Weight
+        {t('t-weight')}
       </Stack>
-      <Stack gap={0.25} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
+      <Stack gap={0.5} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
         <AddReactionOutlinedIcon />
-        Mood
+        {t('t-mood')}
       </Stack>
-      <Stack gap={0.25} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
+      <Stack gap={0.5} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
         <SelfImprovementOutlinedIcon />
-        Meditation
+        {t('t-meditation')}
       </Stack>
-      <Stack gap={0.25} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
+      <Stack gap={0.5} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
         <BedtimeOutlinedIcon />
-        Sleeps
+        {t('t-sleeps')}
       </Stack>
-      <Stack gap={0.25} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
+      <Stack gap={0.5} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
         <FitbitOutlinedIcon />
-        Hobby
+        {t('t-hobby')}
       </Stack>
-      <Stack gap={0.25} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
+      <Stack gap={0.5} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
         <MonitorHeartOutlinedIcon />
-        Monitor
+        {t('t-tracking')}
       </Stack>
-      <Stack gap={0.25} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
+      <Stack gap={0.5} marginBottom={'0.5rem'} justifyContent={'center'} alignItems={'center'}>
         <LocalHospitalOutlinedIcon />
-        Tablet
+        {t('t-tablet')}
       </Stack>
     </Stack>
   )
