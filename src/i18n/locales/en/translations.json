@@ -46,5 +46,15 @@
   "t-lose-weight": "Lose weight",
   "t-gain-mass": "Gain mass",
   "t-goal": "Goal",
-  "t-notice-message": "Would you like to be notified when you take your medications or blood pressure measurements?"
+  "t-notice-message": "Would you like to be notified when you take your medications or blood pressure measurements?",
+  "t-profile": "Profile",
+  "t-food": "Food",
+  "t-water": "Water",
+  "t-fitness": "Fitness",
+  "t-mood": "Mood",
+  "t-meditation": "Mediation",
+  "t-sleeps": "Sleeps",
+  "t-hobby": "Hobby",
+  "t-tracking": "Tracking",
+  "t-tablet": "Tablet"
 }
