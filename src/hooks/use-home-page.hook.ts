@@ -4,6 +4,7 @@ import { db } from '../firebase/firebaseConfig'
 import { setUser } from '../store/slices/userSlice'
 import { selectUser } from '../store/selectors/selectors'
 import { useState } from 'react'
+import { t } from 'i18next'
 
 type HomePageHook = {
   getUser: () => Promise<void>
@@ -12,6 +13,9 @@ type HomePageHook = {
   open: boolean
   handleClick: (event: React.MouseEvent<HTMLElement>) => void
   anchorEl: null | HTMLElement
+  sidebarItems: Array<string>
+  selectedMenu: string
+  sidebarItemClick: (index: number) => void
 }
 
 function useHomePage(): HomePageHook {
@@ -20,7 +24,21 @@ function useHomePage(): HomePageHook {
   const email = localStorage.getItem('email')
   const avatarText = userInfo.name[0] + userInfo.surname[0]
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const [selectedMenu, setSelectedMenu] = useState<string>(`${t('t-profile')}`)
   const open = Boolean(anchorEl)
+  const sidebarItems = [
+    `${t('t-profile')}`,
+    `${t('t-food')}`,
+    `${t('t-water')}`,
+    `${t('t-fitness')}`,
+    `${t('t-weight')}`,
+    `${t('t-mood')}`,
+    `${t('t-meditation')}`,
+    `${t('t-sleeps')}`,
+    `${t('t-hobby')}`,
+    `${t('t-tracking')}`,
+    `${t('t-tablet')}`
+  ]
 
   const handleClose = () => {
     setAnchorEl(null)
@@ -28,6 +46,10 @@ function useHomePage(): HomePageHook {
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
+  }
+
+  const sidebarItemClick = (index: number) => {
+    setSelectedMenu(sidebarItems[index])
   }
 
   const setUserInfo = (Snapshot: QuerySnapshot<DocumentData, DocumentData>) => {
@@ -58,12 +80,15 @@ function useHomePage(): HomePageHook {
   }
 
   return {
-    getUser,
+    selectedMenu,
     avatarText,
     open,
     anchorEl,
+    sidebarItems,
     handleClose,
-    handleClick
+    handleClick,
+    getUser,
+    sidebarItemClick
   }
 }
 

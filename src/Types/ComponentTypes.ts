@@ -69,6 +69,11 @@ export type StepSwitchProps = {
   step: number
 }
 
+export type IconSwitchProps = {
+  children: Array<JSX.Element>
+  text: string
+}
+
 export type TStepSwitch = {
   userInfo: UserInfo
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -94,4 +99,10 @@ export type THeader = {
   open: boolean
   handleClick: (event: React.MouseEvent<HTMLElement>) => void
   anchorEl: HTMLElement | null
+}
+
+export type TSidebar = {
+  sidebarItems: Array<string>
+  selectedMenu: string
+  sidebarItemClick: (index: number) => void
 }

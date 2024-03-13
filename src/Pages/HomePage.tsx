@@ -5,7 +5,17 @@ import Sidebar from '../Components/Sidebar/Sidebar'
 import Header from '../Components/Header/Header'
 
 const HomePage = (): JSX.Element => {
-  const { getUser, avatarText, open, handleClose, handleClick, anchorEl } = useHomePage()
+  const {
+    getUser,
+    avatarText,
+    open,
+    handleClose,
+    handleClick,
+    anchorEl,
+    sidebarItems,
+    selectedMenu,
+    sidebarItemClick
+  } = useHomePage()
   useDefaultRedirect()
   getUser()
 
@@ -19,7 +29,11 @@ const HomePage = (): JSX.Element => {
         anchorEl={anchorEl}
       />
       <Stack flexDirection={'row'}>
-        <Sidebar />
+        <Sidebar
+          sidebarItems={sidebarItems}
+          selectedMenu={selectedMenu}
+          sidebarItemClick={sidebarItemClick}
+        />
       </Stack>
     </Stack>
   )
