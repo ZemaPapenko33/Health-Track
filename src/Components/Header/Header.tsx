@@ -4,7 +4,14 @@ import Logo from '../../assets/HealthLogo.png'
 import { LogoWrapper } from '../Logo/LogoStyled'
 import { THeader } from '../../Types/ComponentTypes'
 
-const Header: React.FC<THeader> = ({ handleClick, avatarText, anchorEl, open, handleClose }) => {
+const Header: React.FC<THeader> = ({
+  handleClick,
+  avatarText,
+  anchorEl,
+  open,
+  handleClose,
+  logOut
+}) => {
   return (
     <AppBar position="static">
       <Toolbar>
@@ -31,7 +38,7 @@ const Header: React.FC<THeader> = ({ handleClick, avatarText, anchorEl, open, ha
               horizontal: 'right'
             }}
           >
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={logOut}>
               <Stack gap={0.25} flexDirection={'row'}>
                 <LogoutIcon />
                 Log out

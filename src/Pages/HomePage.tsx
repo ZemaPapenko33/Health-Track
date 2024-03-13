@@ -14,7 +14,8 @@ const HomePage = (): JSX.Element => {
     anchorEl,
     sidebarItems,
     selectedMenu,
-    sidebarItemClick
+    sidebarItemClick,
+    logOut
   } = useHomePage()
   useDefaultRedirect()
   getUser()
@@ -27,6 +28,7 @@ const HomePage = (): JSX.Element => {
         handleClick={handleClick}
         handleClose={handleClose}
         anchorEl={anchorEl}
+        logOut={logOut}
       />
       <Stack flexDirection={'row'}>
         <Sidebar

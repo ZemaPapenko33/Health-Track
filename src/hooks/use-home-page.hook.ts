@@ -1,10 +1,14 @@
 import { DocumentData, QuerySnapshot, collection, getDocs, query, where } from 'firebase/firestore'
 import { useDispatch, useSelector } from 'react-redux'
-import { db } from '../firebase/firebaseConfig'
+import { auth, db } from '../firebase/firebaseConfig'
 import { setUser } from '../store/slices/userSlice'
 import { selectUser } from '../store/selectors/selectors'
 import { useState } from 'react'
 import { t } from 'i18next'
+import { signOut } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
+import { PageRoutes } from '../shared/enums'
+import { TSidebarItemObject } from '../Types/ObjectTypes'
 
 type HomePageHook = {
   getUser: () => Promise<void>
@@ -13,13 +17,15 @@ type HomePageHook = {
   open: boolean
   handleClick: (event: React.MouseEvent<HTMLElement>) => void
   anchorEl: null | HTMLElement
-  sidebarItems: Array<string>
+  sidebarItems: Array<TSidebarItemObject>
   selectedMenu: string
   sidebarItemClick: (index: number) => void
+  logOut: VoidFunction
 }
 
 function useHomePage(): HomePageHook {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const userInfo = useSelector(selectUser)
   const email = localStorage.getItem('email')
   const avatarText = userInfo.name[0] + userInfo.surname[0]
@@ -27,17 +33,17 @@ function useHomePage(): HomePageHook {
   const [selectedMenu, setSelectedMenu] = useState<string>(`${t('t-profile')}`)
   const open = Boolean(anchorEl)
   const sidebarItems = [
-    `${t('t-profile')}`,
-    `${t('t-food')}`,
-    `${t('t-water')}`,
-    `${t('t-fitness')}`,
-    `${t('t-weight')}`,
-    `${t('t-mood')}`,
-    `${t('t-meditation')}`,
-    `${t('t-sleeps')}`,
-    `${t('t-hobby')}`,
-    `${t('t-tracking')}`,
-    `${t('t-tablet')}`
+    { id: 1, text: `${t('t-profile')}` },
+    { id: 2, text: `${t('t-food')}` },
+    { id: 3, text: `${t('t-water')}` },
+    { id: 4, text: `${t('t-fitness')}` },
+    { id: 5, text: `${t('t-weight')}` },
+    { id: 6, text: `${t('t-mood')}` },
+    { id: 7, text: `${t('t-meditation')}` },
+    { id: 8, text: `${t('t-sleeps')}` },
+    { id: 9, text: `${t('t-hobby')}` },
+    { id: 10, text: `${t('t-tracking')}` },
+    { id: 11, text: `${t('t-tablet')}` }
   ]
 
   const handleClose = () => {
@@ -49,7 +55,7 @@ function useHomePage(): HomePageHook {
   }
 
   const sidebarItemClick = (index: number) => {
-    setSelectedMenu(sidebarItems[index])
+    setSelectedMenu(sidebarItems[index].text)
   }
 
   const setUserInfo = (Snapshot: QuerySnapshot<DocumentData, DocumentData>) => {
@@ -79,6 +85,12 @@ function useHomePage(): HomePageHook {
     setUserInfo(Snapshot)
   }
 
+  const logOut = () => {
+    signOut(auth)
+    localStorage.clear()
+    navigate(PageRoutes.LOGIN_ROUTE)
+  }
+
   return {
     selectedMenu,
     avatarText,
@@ -88,7 +100,8 @@ function useHomePage(): HomePageHook {
     handleClose,
     handleClick,
     getUser,
-    sidebarItemClick
+    sidebarItemClick,
+    logOut
   }
 }
 

@@ -14,8 +14,8 @@ const Sidebar: React.FC<TSidebar> = ({ sidebarItems, selectedMenu, sidebarItemCl
       justifyContent={'flex-end'}
       overflow={'auto'}
     >
-      {sidebarItems.map((itemText, index) => {
-        const isSelected = selectedMenu === itemText
+      {sidebarItems.map((item, index) => {
+        const isSelected = selectedMenu === item.text
         return (
           <Stack
             width={'100%'}
@@ -32,9 +32,10 @@ const Sidebar: React.FC<TSidebar> = ({ sidebarItems, selectedMenu, sidebarItemCl
                 backgroundColor: theme.palette.lightBlue.main
               }
             }}
+            overflow={'hidden'}
           >
-            <Icons text={itemText} />
-            {itemText}
+            <Icons text={item.text} />
+            {item.text}
           </Stack>
         )
       })}
