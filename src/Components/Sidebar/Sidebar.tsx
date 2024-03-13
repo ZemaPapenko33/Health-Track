@@ -18,6 +18,7 @@ const Sidebar: React.FC<TSidebar> = ({ sidebarItems, selectedMenu, sidebarItemCl
         const isSelected = selectedMenu === item.text
         return (
           <Stack
+            key={item.id}
             width={'100%'}
             height={'50px'}
             marginBottom={'0.5rem'}
