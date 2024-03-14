@@ -7,19 +7,12 @@ const Sidebar: React.FC<TSidebar> = ({ sidebarItems, selectedMenu, sidebarItemCl
   const theme = useTheme()
 
   return (
-    <Stack
-      width={'7%'}
-      height={'100%'}
-      paddingTop={'0.5rem'}
-      justifyContent={'flex-end'}
-      overflow={'auto'}
-    >
+    <Stack width={'7%'} paddingTop={'0.5rem'} overflow={'auto'}>
       {sidebarItems.map((item, index) => {
         const isSelected = selectedMenu === item.text
         return (
           <Stack
             key={item.id}
-            width={'100%'}
             height={'50px'}
             marginBottom={'0.5rem'}
             justifyContent={'center'}
@@ -30,10 +23,9 @@ const Sidebar: React.FC<TSidebar> = ({ sidebarItems, selectedMenu, sidebarItemCl
             style={{ cursor: 'pointer' }}
             sx={{
               '&:hover': {
-                backgroundColor: theme.palette.lightBlue.main
+                backgroundColor: isSelected ? '' : theme.palette.lightBlue.main
               }
             }}
-            overflow={'hidden'}
           >
             <Icons text={item.text} />
             {item.text}
