@@ -108,3 +108,7 @@ export type TSidebar = {
   selectedMenu: string
   sidebarItemClick: (index: number) => void
 }
+
+export type TIcons = {
+  text: string
+}

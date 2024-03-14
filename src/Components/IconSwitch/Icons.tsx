@@ -12,8 +12,9 @@ import MonitorHeartOutlinedIcon from '@mui/icons-material/MonitorHeartOutlined'
 import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined'
 import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined'
 import { t } from 'i18next'
+import { TIcons } from '../../Types/ComponentTypes'
 
-const Icons = ({ text }: { text: string }) => {
+const Icons: React.FC<TIcons> = ({ text }) => {
   return (
     <IconSwitch text={text}>
       <AssignmentIndOutlinedIcon data-text={t('t-profile')} />
