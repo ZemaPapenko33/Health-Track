@@ -2,6 +2,7 @@ import { FormEvent } from 'react'
 import { TErrorMessage } from './ErrorTypes'
 import { UserInfo } from './UserTypes'
 import { SelectChangeEvent } from '@mui/material'
+import { TSidebarItemObject } from './ObjectTypes'
 
 export type TEmailInput = {
   emailError: boolean
@@ -69,6 +70,11 @@ export type StepSwitchProps = {
   step: number
 }
 
+export type IconSwitchProps = {
+  children: Array<JSX.Element>
+  text: string
+}
+
 export type TStepSwitch = {
   userInfo: UserInfo
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -94,4 +100,15 @@ export type THeader = {
   open: boolean
   handleClick: (event: React.MouseEvent<HTMLElement>) => void
   anchorEl: HTMLElement | null
+  logOut: VoidFunction
+}
+
+export type TSidebar = {
+  sidebarItems: Array<TSidebarItemObject>
+  selectedMenu: string
+  sidebarItemClick: (index: number) => void
+}
+
+export type TIcons = {
+  text: string
 }
