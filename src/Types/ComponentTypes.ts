@@ -75,6 +75,11 @@ export type IconSwitchProps = {
   text: string
 }
 
+export type TContentSwitchProps = {
+  children: Array<JSX.Element>
+  selectedMenu: string
+}
+
 export type TStepSwitch = {
   userInfo: UserInfo
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -111,4 +116,20 @@ export type TSidebar = {
 
 export type TIcons = {
   text: string
+}
+
+export type TContentHomePage = {
+  selectedMenu: string
+  userBMI: number
+  percentUserBMI: number
+}
+
+export type TProfile = {
+  userBMI: number
+  percentUserBMI: number
+}
+
+export type TBMIData = {
+  message: string
+  color: string
 }

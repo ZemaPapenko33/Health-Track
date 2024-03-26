@@ -111,7 +111,7 @@ function useProfilePage(): ProfilePageHook {
     createUser()
     localStorage.removeItem('registration')
     localStorage.setItem('userAuth', 'true')
-    navigate(PageRoutes.HOME_ROUTE)
+    navigate(`${PageRoutes.HOME_ROUTE}?menu=profile`)
   }
 
   const buttonAction = activeStep !== steps.length - 1 ? handleNext : handleFinish

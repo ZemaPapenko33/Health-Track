@@ -3,6 +3,8 @@ import { useDefaultRedirect } from '../hooks/use-default-redirect.hook'
 import useHomePage from '../hooks/use-home-page.hook'
 import Sidebar from '../Components/Sidebar/Sidebar'
 import Header from '../Components/Header/Header'
+import ContentHomePage from '../Components/ContentHomePage/ContentHomePage'
+import { useEffect } from 'react'
 
 const HomePage = (): JSX.Element => {
   const {
@@ -14,11 +16,17 @@ const HomePage = (): JSX.Element => {
     anchorEl,
     sidebarItems,
     selectedMenu,
+    userBMI,
+    percentUserBMI,
     sidebarItemClick,
     logOut
   } = useHomePage()
   useDefaultRedirect()
-  getUser()
+
+  useEffect(() => {
+    getUser()
+    window.history.replaceState({}, '', '/?menu=profile')
+  }, [])
 
   return (
     <Stack width={'100vw'} height={'100vh'} overflow={'hidden'}>
@@ -35,6 +43,11 @@ const HomePage = (): JSX.Element => {
           sidebarItems={sidebarItems}
           selectedMenu={selectedMenu}
           sidebarItemClick={sidebarItemClick}
+        />
+        <ContentHomePage
+          selectedMenu={selectedMenu}
+          userBMI={userBMI}
+          percentUserBMI={percentUserBMI}
         />
       </Stack>
     </Stack>

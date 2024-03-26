@@ -36,7 +36,7 @@ function useAuthPage(): AuthPageHook {
       const currentUser = await signInWithEmailAndPassword(auth, email, password)
       localStorage.setItem('userAuth', currentUser.operationType)
       localStorage.setItem('email', email)
-      navigateTo(PageRoutes.HOME_ROUTE)
+      navigateTo(`${PageRoutes.HOME_ROUTE}?menu=profile`)
     } catch (error) {
       const firebaseError = error as FirebaseError
       handleError(firebaseError, setErrorMessage, errorMessage)
