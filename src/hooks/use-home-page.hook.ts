@@ -37,7 +37,7 @@ function useHomePage(): HomePageHook {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const location = useLocation()
   const queryParams = new URLSearchParams(location.search)
-  const [selectedMenu, setSelectedMenu] = useState<string>(t('t-profile'))
+  const [selectedMenu, setSelectedMenu] = useState<string>(t(`t-${queryParams.get('activeMenu')}`))
   const open = Boolean(anchorEl)
   const isTrackingAndTablet = userInfo.notices
   const userBMI = Math.floor(userInfo.weight / (userInfo.height / 100) ** 2)
@@ -69,12 +69,9 @@ function useHomePage(): HomePageHook {
 
   const sidebarItemClick = (index: number) => {
     setSelectedMenu(sidebarItems[index].text)
-    queryParams.set('menu', sidebarItems[index].text)
-    window.history.replaceState(
-      {},
-      '',
-      `${location.pathname}?${queryParams.toString().toLocaleLowerCase()}`
-    )
+    const newQueryParams = new URLSearchParams()
+    newQueryParams.set('activeMenu', sidebarItems[index].text.toLocaleLowerCase())
+    window.history.replaceState({}, '', `${location.pathname}?${newQueryParams.toString()}`)
   }
 
   const setUserInfo = (Snapshot: QuerySnapshot<DocumentData, DocumentData>) => {

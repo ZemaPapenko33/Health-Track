@@ -133,3 +133,8 @@ export type TBMIData = {
   message: string
   color: string
 }
+
+export type TBMI = {
+  userBMI: number
+  percentUserBMI: number
+}

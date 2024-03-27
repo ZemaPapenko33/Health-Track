@@ -9,9 +9,7 @@ const ContentHomePage: React.FC<TContentHomePage> = ({ selectedMenu, userBMI, pe
   return (
     <ContentSwitch selectedMenu={selectedMenu}>
       <Profile data-text={t('t-profile')} userBMI={userBMI} percentUserBMI={percentUserBMI} />
-      <Stack></Stack>
-      <Stack></Stack>
-      <Stack></Stack>
+      <Stack>This will be block Food</Stack>
     </ContentSwitch>
   )
 }

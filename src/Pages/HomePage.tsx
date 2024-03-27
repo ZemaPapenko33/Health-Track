@@ -25,7 +25,11 @@ const HomePage = (): JSX.Element => {
 
   useEffect(() => {
     getUser()
-    window.history.replaceState({}, '', '/?menu=profile')
+    const queryParams = new URLSearchParams(window.location.search)
+    if (!queryParams.has('activeMenu')) {
+      queryParams.set('activeMenu', 'profile')
+      window.history.replaceState({}, '', `${window.location.pathname}?${queryParams.toString()}`)
+    }
   }, [])
 
   return (
