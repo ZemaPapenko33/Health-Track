@@ -10,6 +10,12 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { PageRoutes } from '../shared/enums'
 import { TSidebarItemObject } from '../Types/ObjectTypes'
 import { UserInfo } from '../Types/UserTypes'
+import {
+  HEIGHT_CONVERSION_FACTOR,
+  MAX_BMI,
+  PERCENT_CONVERSION_FACTOR,
+  SQUARE
+} from '../shared/consts/BMI'
 
 type HomePageHook = {
   getUser: () => Promise<void>
@@ -40,8 +46,10 @@ function useHomePage(): HomePageHook {
   const [selectedMenu, setSelectedMenu] = useState<string>(t(`t-${queryParams.get('activeMenu')}`))
   const open = Boolean(anchorEl)
   const isTrackingAndTablet = userInfo.notices
-  const userBMI = Math.floor(userInfo.weight / (userInfo.height / 100) ** 2)
-  const percentUserBMI = Math.floor((userBMI / 40.1) * 100)
+  const userBMI = Math.floor(
+    userInfo.weight / (userInfo.height / HEIGHT_CONVERSION_FACTOR) ** SQUARE
+  )
+  const percentUserBMI = Math.floor((userBMI / MAX_BMI) * PERCENT_CONVERSION_FACTOR)
 
   const sidebarItems = [
     { id: 1, text: `${t('t-profile')}` },
