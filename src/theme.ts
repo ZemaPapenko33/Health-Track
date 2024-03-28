@@ -11,6 +11,8 @@ declare module '@mui/material/styles' {
     white?: PaletteColorOptions
     blackGrey?: PaletteColorOptions
     salad?: PaletteColorOptions
+    softRed?: PaletteColorOptions
+    softYellow?: PaletteColorOptions
   }
 }
 
@@ -26,6 +28,8 @@ declare module '@mui/material/styles' {
     white: PaletteColor
     blackGrey: PaletteColor
     salad: PaletteColor
+    softRed: PaletteColor
+    softYellow: PaletteColor
   }
 
   interface Theme {
@@ -49,6 +53,12 @@ export const theme: Theme = createTheme({
     },
     salad: {
       main: 'rgb(218, 255, 239)'
+    },
+    softRed: {
+      main: 'rgb(140, 28, 19)'
+    },
+    softYellow: {
+      main: 'rgb(221, 227, 146)'
     }
   }
 })

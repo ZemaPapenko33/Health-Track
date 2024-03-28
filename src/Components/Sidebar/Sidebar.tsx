@@ -14,6 +14,7 @@ const Sidebar: React.FC<TSidebar> = ({ sidebarItems, selectedMenu, sidebarItemCl
           <Stack
             key={item.id}
             height={'50px'}
+            width={'100%'}
             marginBottom={'0.5rem'}
             justifyContent={'center'}
             alignItems={'center'}

@@ -56,5 +56,17 @@
   "t-sleeps": "Sleeps",
   "t-hobby": "Hobby",
   "t-tracking": "Tracking",
-  "t-tablet": "Tablet"
+  "t-tablet": "Tablet",
+  "t-cal": "Calories",
+  "t-BMI": "BMI",
+  "t-cal-today": "Calories today",
+  "t-your-BMI": "Your BMI",
+  "t-BMI-less-16": "Severe mass deficit",
+  "t-BMI-16-18.5": "Insufficient body mass",
+  "t-BMI-18.6-25": "Normal",
+  "t-BMI-25.1-30": "Excessive body mass",
+  "t-BMI-30.1-35": "Obesity of the first degree",
+  "t-BMI-35.1-40": "Obesity of the second degree",
+  "t-BMI-more-40.1": "Obesity of the third degree",
+  "t-water-today": "Water today"
 }

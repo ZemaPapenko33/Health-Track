@@ -6,21 +6,32 @@ import { selectUser } from '../store/selectors/selectors'
 import { useState } from 'react'
 import { t } from 'i18next'
 import { signOut } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { PageRoutes } from '../shared/enums'
 import { TSidebarItemObject } from '../Types/ObjectTypes'
+import { UserInfo } from '../Types/UserTypes'
+import {
+  HEIGHT_CONVERSION_FACTOR,
+  MAX_BMI,
+  PERCENT_CONVERSION_FACTOR,
+  SQUARE
+} from '../shared/consts/BMI'
 
 type HomePageHook = {
   getUser: () => Promise<void>
   avatarText: string
   handleClose: VoidFunction
   open: boolean
+  isTrackingAndTablet: boolean
   handleClick: (event: React.MouseEvent<HTMLElement>) => void
   anchorEl: null | HTMLElement
   sidebarItems: Array<TSidebarItemObject>
   selectedMenu: string
   sidebarItemClick: (index: number) => void
   logOut: VoidFunction
+  userInfo: UserInfo
+  userBMI: number
+  percentUserBMI: number
 }
 
 function useHomePage(): HomePageHook {
@@ -30,8 +41,16 @@ function useHomePage(): HomePageHook {
   const email = localStorage.getItem('email')
   const avatarText = userInfo.name[0] + userInfo.surname[0]
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const [selectedMenu, setSelectedMenu] = useState<string>(`${t('t-profile')}`)
+  const location = useLocation()
+  const queryParams = new URLSearchParams(location.search)
+  const [selectedMenu, setSelectedMenu] = useState<string>(t(`t-${queryParams.get('activeMenu')}`))
   const open = Boolean(anchorEl)
+  const isTrackingAndTablet = userInfo.notices
+  const userBMI = Math.floor(
+    userInfo.weight / (userInfo.height / HEIGHT_CONVERSION_FACTOR) ** SQUARE
+  )
+  const percentUserBMI = Math.floor((userBMI / MAX_BMI) * PERCENT_CONVERSION_FACTOR)
+
   const sidebarItems = [
     { id: 1, text: `${t('t-profile')}` },
     { id: 2, text: `${t('t-food')}` },
@@ -41,10 +60,12 @@ function useHomePage(): HomePageHook {
     { id: 6, text: `${t('t-mood')}` },
     { id: 7, text: `${t('t-meditation')}` },
     { id: 8, text: `${t('t-sleeps')}` },
-    { id: 9, text: `${t('t-hobby')}` },
-    { id: 10, text: `${t('t-tracking')}` },
-    { id: 11, text: `${t('t-tablet')}` }
+    { id: 9, text: `${t('t-hobby')}` }
   ]
+
+  if (isTrackingAndTablet) {
+    sidebarItems.push({ id: 10, text: `${t('t-tracking')}` }, { id: 11, text: `${t('t-tablet')}` })
+  }
 
   const handleClose = () => {
     setAnchorEl(null)
@@ -56,6 +77,9 @@ function useHomePage(): HomePageHook {
 
   const sidebarItemClick = (index: number) => {
     setSelectedMenu(sidebarItems[index].text)
+    const newQueryParams = new URLSearchParams()
+    newQueryParams.set('activeMenu', sidebarItems[index].text.toLocaleLowerCase())
+    window.history.replaceState({}, '', `${location.pathname}?${newQueryParams.toString()}`)
   }
 
   const setUserInfo = (Snapshot: QuerySnapshot<DocumentData, DocumentData>) => {
@@ -92,11 +116,15 @@ function useHomePage(): HomePageHook {
   }
 
   return {
+    isTrackingAndTablet,
     selectedMenu,
     avatarText,
     open,
     anchorEl,
     sidebarItems,
+    userInfo,
+    userBMI,
+    percentUserBMI,
     handleClose,
     handleClick,
     getUser,
