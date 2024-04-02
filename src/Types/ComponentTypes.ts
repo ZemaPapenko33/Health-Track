@@ -11,7 +11,7 @@ export type TEmailInput = {
 }
 
 export type IFormForRegAndAuth = {
-  keyText: string
+  buttonContent: string | JSX.Element
   showPassword: boolean
   passwordInputType: string
   errorMessage: TErrorMessage
@@ -106,12 +106,14 @@ export type THeader = {
   handleClick: (event: React.MouseEvent<HTMLElement>) => void
   anchorEl: HTMLElement | null
   logOut: VoidFunction
+  isLoading: boolean
 }
 
 export type TSidebar = {
   sidebarItems: Array<TSidebarItemObject>
   selectedMenu: string
   sidebarItemClick: (index: number) => void
+  isLoading: boolean
 }
 
 export type TIcons = {
@@ -122,11 +124,13 @@ export type TContentHomePage = {
   selectedMenu: string
   userBMI: number
   percentUserBMI: number
+  isLoading: boolean
 }
 
 export type TProfile = {
   userBMI: number
   percentUserBMI: number
+  isLoading: boolean
 }
 
 export type TBMIData = {

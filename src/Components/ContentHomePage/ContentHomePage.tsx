@@ -5,10 +5,20 @@ import { t } from 'i18next'
 import { Stack } from '@mui/material'
 import Profile from '../Profile/Profile'
 
-const ContentHomePage: React.FC<TContentHomePage> = ({ selectedMenu, userBMI, percentUserBMI }) => {
+const ContentHomePage: React.FC<TContentHomePage> = ({
+  selectedMenu,
+  userBMI,
+  percentUserBMI,
+  isLoading
+}) => {
   return (
     <ContentSwitch selectedMenu={selectedMenu}>
-      <Profile data-text={t('t-profile')} userBMI={userBMI} percentUserBMI={percentUserBMI} />
+      <Profile
+        data-text={t('t-profile')}
+        userBMI={userBMI}
+        percentUserBMI={percentUserBMI}
+        isLoading={isLoading}
+      />
       <Stack>This will be block Food</Stack>
     </ContentSwitch>
   )

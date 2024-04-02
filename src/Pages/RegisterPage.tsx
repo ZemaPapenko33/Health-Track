@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, useTheme } from '@mui/material'
+import { Box, CircularProgress, Stack, Typography, useTheme } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { BgImage } from '../Components/BgImage/BgImageStyled'
 import FormForRegAndAuth from '../Components/FormForRegAndAuth/FormForRegAndAuth'
@@ -18,9 +18,11 @@ const RegisterPage = (): JSX.Element => {
     showPasswordHandler,
     errorMessage,
     showPassword,
-    passwordInputType
+    passwordInputType,
+    isLoading
   } = useRegisterPage()
   useDefaultRedirect()
+  const buttonContent = isLoading ? <CircularProgress size={20} color="info" /> : t('t-register')
 
   return (
     <Stack width={`100vw`} flexDirection={`row`} height={`100vh`}>
@@ -31,7 +33,7 @@ const RegisterPage = (): JSX.Element => {
         <Typography variant="h2">{t('t-health-track')}</Typography>
         <Typography variant="subtitle1">{t('t-welcome')}</Typography>
         <FormForRegAndAuth
-          keyText={t('t-register')}
+          buttonContent={buttonContent}
           formHandler={formHandler}
           emailInputHandler={emailInputHandler}
           passwordInputHandler={passwordInputHandler}

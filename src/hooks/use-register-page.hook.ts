@@ -12,6 +12,7 @@ type RegisterPageHook = {
   errorMessage: TErrorMessage
   showPassword: boolean
   passwordInputType: string
+  isLoading: boolean
   formHandler: (event: FormEvent) => Promise<void>
   emailInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
   passwordInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -26,12 +27,14 @@ function useRegisterPage(): RegisterPageHook {
     defaultError: ''
   })
   const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const navigateTo = useNavigate()
 
   const passwordInputType = showPassword ? 'text' : 'password'
 
   const formHandler = async (event: FormEvent): Promise<void> => {
     event.preventDefault()
+    setIsLoading(true)
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
       if (userCredential.user) {
@@ -48,6 +51,8 @@ function useRegisterPage(): RegisterPageHook {
       const firebaseError = error as FirebaseError
       handleError(firebaseError, setErrorMessage, errorMessage)
       return
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -62,7 +67,8 @@ function useRegisterPage(): RegisterPageHook {
     showPasswordHandler,
     errorMessage,
     showPassword,
-    passwordInputType
+    passwordInputType,
+    isLoading
   }
 }
 

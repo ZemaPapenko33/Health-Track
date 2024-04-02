@@ -18,6 +18,7 @@ const HomePage = (): JSX.Element => {
     selectedMenu,
     userBMI,
     percentUserBMI,
+    isLoading,
     sidebarItemClick,
     logOut
   } = useHomePage()
@@ -41,14 +42,17 @@ const HomePage = (): JSX.Element => {
         handleClose={handleClose}
         anchorEl={anchorEl}
         logOut={logOut}
+        isLoading={isLoading}
       />
-      <Stack flexDirection={'row'}>
+      <Stack flexDirection={'row'} width={'100%'} height={'91%'}>
         <Sidebar
           sidebarItems={sidebarItems}
           selectedMenu={selectedMenu}
           sidebarItemClick={sidebarItemClick}
+          isLoading={isLoading}
         />
         <ContentHomePage
+          isLoading={isLoading}
           selectedMenu={selectedMenu}
           userBMI={userBMI}
           percentUserBMI={percentUserBMI}

@@ -31,6 +31,7 @@ type HomePageHook = {
   logOut: VoidFunction
   userInfo: UserInfo
   userBMI: number
+  isLoading: boolean
   percentUserBMI: number
 }
 
@@ -50,6 +51,7 @@ function useHomePage(): HomePageHook {
     userInfo.weight / (userInfo.height / HEIGHT_CONVERSION_FACTOR) ** SQUARE
   )
   const percentUserBMI = Math.floor((userBMI / MAX_BMI) * PERCENT_CONVERSION_FACTOR)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const sidebarItems = [
     { id: 1, text: `${t('t-profile')}` },
@@ -103,10 +105,12 @@ function useHomePage(): HomePageHook {
   }
 
   const getUser = async () => {
+    setIsLoading(true)
     const userRef = collection(db, 'Users')
     const request = query(userRef, where('email', '==', email))
     const Snapshot = await getDocs(request)
     setUserInfo(Snapshot)
+    setIsLoading(false)
   }
 
   const logOut = () => {
@@ -124,6 +128,7 @@ function useHomePage(): HomePageHook {
     sidebarItems,
     userInfo,
     userBMI,
+    isLoading,
     percentUserBMI,
     handleClose,
     handleClick,
