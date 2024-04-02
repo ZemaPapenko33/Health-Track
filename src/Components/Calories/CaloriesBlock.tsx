@@ -18,10 +18,10 @@ const CaloriesBlock = () => {
       <CircularProgress
         variant="determinate"
         value={100}
-        size={200}
+        size={230}
         style={{ position: 'absolute', color: theme.palette.salad.main }}
       />
-      <CircularProgress variant="determinate" value={20} size={200} />
+      <CircularProgress variant="determinate" value={20} size={230} />
       <Stack position="absolute" alignItems="center" justifyContent="center">
         <Typography variant="h5" color="textSecondary">
           0/1865

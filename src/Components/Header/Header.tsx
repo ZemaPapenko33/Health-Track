@@ -3,6 +3,7 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import Logo from '../../assets/HealthLogo.png'
 import { LogoWrapper } from '../Logo/LogoStyled'
 import { THeader } from '../../Types/ComponentTypes'
+import { t } from 'i18next'
 
 const Header: React.FC<THeader> = ({
   handleClick,
@@ -41,7 +42,7 @@ const Header: React.FC<THeader> = ({
             <MenuItem onClick={logOut}>
               <Stack gap={0.25} flexDirection={'row'}>
                 <LogoutIcon />
-                Log out
+                {t('t-logOut')}
               </Stack>
             </MenuItem>
           </Menu>

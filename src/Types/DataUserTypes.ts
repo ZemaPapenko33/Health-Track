@@ -1,31 +1,49 @@
+export type TFood = {
+  calories: number
+  nameFood: string
+}
+
 export type TWater = {
-  date: string
-  volume: number
-}
-
-export type TAllCaloriesToday = {
-  date: string
-  allCalories: number
-}
-
-export type TAllWaterToday = {
-  date: string
-  allWater: number
+  ml: number
+  time: string
 }
 
 export type TFitness = {
-  date: string
-  expendCalories: number
+  calories: number
+  level: string
+  nameProgram: string
   time: string
 }
 
 export type TMood = {
-  date: string
-  mood: string
+  data: string
+  moodUser: string
 }
 
 export type TSleeps = {
-  date: string
-  bedtime: string
+  bedTime: string
   wakeUpTime: string
+  totalSleepTime: string
+  data: string
+}
+
+export type TMeditation = {
+  nameProgram: string
+  time: string
+}
+
+export type THobby = {
+  dataStart: string
+  dataEnd: string
+  nameHobby: string
+}
+
+export type InitialStateDataUser = {
+  userFood: Array<TFood>
+  userWater: Array<TWater>
+  userFitness: Array<TFitness>
+  userMood: Array<TMood>
+  userSleeps: Array<TSleeps>
+  userMeditation: Array<TMeditation>
+  userHobby: Array<THobby>
 }
