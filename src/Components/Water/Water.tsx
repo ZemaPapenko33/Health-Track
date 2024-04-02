@@ -18,13 +18,13 @@ const WaterBlock = () => {
       <CircularProgress
         variant="determinate"
         value={100}
-        size={200}
+        size={230}
         style={{ position: 'absolute', color: theme.palette.blackGrey.main }}
       />
       <CircularProgress
         variant="determinate"
         value={20}
-        size={200}
+        size={230}
         style={{ color: theme.palette.lightBlue.main }}
       />
       <Stack position="absolute" alignItems="center" justifyContent="center">

@@ -68,5 +68,6 @@
   "t-BMI-30.1-35": "Obesity of the first degree",
   "t-BMI-35.1-40": "Obesity of the second degree",
   "t-BMI-more-40.1": "Obesity of the third degree",
-  "t-water-today": "Water today"
+  "t-water-today": "Water today",
+  "t-logOut": "Log out"
 }

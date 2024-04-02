@@ -22,13 +22,13 @@ const BMI: React.FC<TBMI> = ({ userBMI, percentUserBMI }) => {
       <CircularProgress
         variant="determinate"
         value={100}
-        size={200}
+        size={230}
         style={{ position: 'absolute', color: theme.palette.salad.main }}
       />
       <CircularProgress
         variant="determinate"
         value={percentUserBMI}
-        size={200}
+        size={230}
         style={{ color: BMIData.color }}
       />
       <Stack position="absolute" alignItems="center" justifyContent="center">
@@ -38,7 +38,7 @@ const BMI: React.FC<TBMI> = ({ userBMI, percentUserBMI }) => {
         <Typography variant="h5" color="textSecondary">
           {userBMI}
         </Typography>
-        <Typography variant="h6" color="textSecondary">
+        <Typography variant="body2" color="textSecondary">
           {BMIData.message}
         </Typography>
       </Stack>
