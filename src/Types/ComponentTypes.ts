@@ -142,3 +142,10 @@ export type TBMI = {
   userBMI: number
   percentUserBMI: number
 }
+
+export type TSidebarItem = {
+  isSelected: boolean
+  sidebarItemClick: (index: number) => void
+  index: number
+  item: TSidebarItemObject
+}

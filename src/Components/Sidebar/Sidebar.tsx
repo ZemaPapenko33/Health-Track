@@ -1,7 +1,8 @@
 import React from 'react'
-import { Skeleton, Stack, useTheme } from '@mui/material'
+import { Skeleton, Stack } from '@mui/material'
 import { TSidebar } from '../../Types/ComponentTypes'
-import Icons from '../IconSwitch/Icons'
+
+import SidebarItem from '../SidebarItem/SidebarItem'
 
 const Sidebar: React.FC<TSidebar> = ({
   sidebarItems,
@@ -9,8 +10,6 @@ const Sidebar: React.FC<TSidebar> = ({
   sidebarItemClick,
   isLoading
 }) => {
-  const theme = useTheme()
-
   return (
     <Stack width={'7%'} paddingTop={'0.5rem'} overflow={'auto'}>
       {isLoading ? (
@@ -20,26 +19,12 @@ const Sidebar: React.FC<TSidebar> = ({
           {sidebarItems.map((item, index) => {
             const isSelected = selectedMenu === item.text
             return (
-              <Stack
-                key={item.id}
-                height={'50px'}
-                width={'100%'}
-                marginBottom={'0.5rem'}
-                justifyContent={'center'}
-                alignItems={'center'}
-                borderRadius={'0 30px 30px 0'}
-                bgcolor={isSelected ? theme.palette.salad.main : ''}
-                onClick={() => sidebarItemClick(index)}
-                style={{ cursor: 'pointer' }}
-                sx={{
-                  '&:hover': {
-                    backgroundColor: isSelected ? '' : theme.palette.lightBlue.main
-                  }
-                }}
-              >
-                <Icons text={item.text} />
-                {item.text}
-              </Stack>
+              <SidebarItem
+                isSelected={isSelected}
+                index={index}
+                item={item}
+                sidebarItemClick={sidebarItemClick}
+              />
             )
           })}
         </>
