@@ -12,6 +12,8 @@ type AuthPageHook = {
   showPassword: boolean
   passwordInputType: string
   errorMessage: TErrorMessage
+  isLoading: boolean
+  isLoadingGoogle: boolean
   emailInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
   passwordInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
   showPasswordHandler: VoidFunction
@@ -27,11 +29,14 @@ function useAuthPage(): AuthPageHook {
     defaultError: ''
   })
   const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoadingGoogle, setIsLoadingGoogle] = useState<boolean>(false)
   const navigateTo = useNavigate()
   const passwordInputType = showPassword ? 'text' : 'password'
 
   const formHandler = async (event: FormEvent): Promise<void> => {
     event.preventDefault()
+    setIsLoading(true)
     try {
       const currentUser = await signInWithEmailAndPassword(auth, email, password)
       localStorage.setItem('userAuth', currentUser.operationType)
@@ -41,6 +46,8 @@ function useAuthPage(): AuthPageHook {
       const firebaseError = error as FirebaseError
       handleError(firebaseError, setErrorMessage, errorMessage)
       return
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -48,7 +55,7 @@ function useAuthPage(): AuthPageHook {
     event.preventDefault()
     const provider = new GoogleAuthProvider()
     auth.useDeviceLanguage()
-
+    setIsLoadingGoogle(true)
     try {
       const currentUser = await signInWithPopup(auth, provider)
       localStorage.setItem('email', currentUser.user.email!)
@@ -58,6 +65,8 @@ function useAuthPage(): AuthPageHook {
       const firebaseError = error as FirebaseError
       handleError(firebaseError, setErrorMessage, errorMessage)
       return
+    } finally {
+      setIsLoadingGoogle(false)
     }
   }
 
@@ -69,6 +78,8 @@ function useAuthPage(): AuthPageHook {
     passwordInputType,
     errorMessage,
     showPassword,
+    isLoading,
+    isLoadingGoogle,
     showPasswordHandler,
     passwordInputHandler,
     emailInputHandler,

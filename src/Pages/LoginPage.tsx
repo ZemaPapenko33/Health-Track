@@ -1,6 +1,6 @@
 import imgBack from '../assets/HealthBack.png'
 import GoogleIcon from '@mui/icons-material/Google'
-import { Box, Button, Stack, Typography, useTheme } from '@mui/material'
+import { Box, Button, CircularProgress, Stack, Typography, useTheme } from '@mui/material'
 import { BgImage } from '../Components/BgImage/BgImageStyled'
 import SeparationBox from '../Components/SeparationBox/SeparationBox'
 import { useTranslation } from 'react-i18next'
@@ -16,6 +16,8 @@ const LoginPage = (): JSX.Element => {
     passwordInputType,
     errorMessage,
     showPassword,
+    isLoading,
+    isLoadingGoogle,
     passwordInputHandler,
     emailInputHandler,
     showPasswordHandler,
@@ -23,6 +25,12 @@ const LoginPage = (): JSX.Element => {
     googleHandler
   } = useAuthPage()
   const theme = useTheme()
+  const buttonContent = isLoading ? <CircularProgress size={20} color="info" /> : t('t-sign-in')
+  const googleButtonContent = isLoadingGoogle ? (
+    <CircularProgress size={20} color="info" />
+  ) : (
+    <Typography>{t('t-sign-in-with-Google')}</Typography>
+  )
   useDefaultRedirect()
 
   return (
@@ -34,7 +42,7 @@ const LoginPage = (): JSX.Element => {
         <Typography variant="h2">{t('t-health-track')}</Typography>
         <Typography variant="subtitle1">{t('t-welcome-back')}</Typography>
         <FormForRegAndAuth
-          keyText={t('t-sign-in')}
+          buttonContent={buttonContent}
           formHandler={formHandler}
           emailInputHandler={emailInputHandler}
           passwordInputHandler={passwordInputHandler}
@@ -47,7 +55,7 @@ const LoginPage = (): JSX.Element => {
         <Button variant="outlined" onClick={googleHandler}>
           <Stack gap={1} flexDirection={'row'}>
             <GoogleIcon />
-            <Typography>{t('t-sign-in-with-Google')}</Typography>
+            {googleButtonContent}
           </Stack>
         </Button>
         <Stack paddingTop={'1rem'}>

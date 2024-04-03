@@ -19,18 +19,14 @@ import {
 
 type HomePageHook = {
   getUser: () => Promise<void>
-  avatarText: string
-  handleClose: VoidFunction
-  open: boolean
   isTrackingAndTablet: boolean
-  handleClick: (event: React.MouseEvent<HTMLElement>) => void
-  anchorEl: null | HTMLElement
   sidebarItems: Array<TSidebarItemObject>
   selectedMenu: string
   sidebarItemClick: (index: number) => void
   logOut: VoidFunction
   userInfo: UserInfo
   userBMI: number
+  isLoading: boolean
   percentUserBMI: number
 }
 
@@ -39,17 +35,16 @@ function useHomePage(): HomePageHook {
   const navigate = useNavigate()
   const userInfo = useSelector(selectUser)
   const email = localStorage.getItem('email')
-  const avatarText = userInfo.name[0] + userInfo.surname[0]
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const location = useLocation()
   const queryParams = new URLSearchParams(location.search)
   const [selectedMenu, setSelectedMenu] = useState<string>(t(`t-${queryParams.get('activeMenu')}`))
-  const open = Boolean(anchorEl)
+
   const isTrackingAndTablet = userInfo.notices
   const userBMI = Math.floor(
     userInfo.weight / (userInfo.height / HEIGHT_CONVERSION_FACTOR) ** SQUARE
   )
   const percentUserBMI = Math.floor((userBMI / MAX_BMI) * PERCENT_CONVERSION_FACTOR)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const sidebarItems = [
     { id: 1, text: `${t('t-profile')}` },
@@ -65,14 +60,6 @@ function useHomePage(): HomePageHook {
 
   if (isTrackingAndTablet) {
     sidebarItems.push({ id: 10, text: `${t('t-tracking')}` }, { id: 11, text: `${t('t-tablet')}` })
-  }
-
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
   }
 
   const sidebarItemClick = (index: number) => {
@@ -103,10 +90,12 @@ function useHomePage(): HomePageHook {
   }
 
   const getUser = async () => {
+    setIsLoading(true)
     const userRef = collection(db, 'Users')
     const request = query(userRef, where('email', '==', email))
     const Snapshot = await getDocs(request)
     setUserInfo(Snapshot)
+    setIsLoading(false)
   }
 
   const logOut = () => {
@@ -118,15 +107,11 @@ function useHomePage(): HomePageHook {
   return {
     isTrackingAndTablet,
     selectedMenu,
-    avatarText,
-    open,
-    anchorEl,
     sidebarItems,
     userInfo,
     userBMI,
+    isLoading,
     percentUserBMI,
-    handleClose,
-    handleClick,
     getUser,
     sidebarItemClick,
     logOut

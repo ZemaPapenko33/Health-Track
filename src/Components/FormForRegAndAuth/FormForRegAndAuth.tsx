@@ -6,7 +6,7 @@ import PasswordInput from '../PasswordInput/PasswordInput'
 import { IFormForRegAndAuth } from '../../Types/ComponentTypes'
 
 const FormForRegAndAuth: React.FC<IFormForRegAndAuth> = ({
-  keyText,
+  buttonContent,
   showPassword,
   passwordInputType,
   errorMessage,
@@ -32,7 +32,7 @@ const FormForRegAndAuth: React.FC<IFormForRegAndAuth> = ({
       />
 
       <Button variant="contained" type="submit">
-        {keyText}
+        {buttonContent}
       </Button>
     </FormForRegAndAuthWrapper>
   )

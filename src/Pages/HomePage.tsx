@@ -9,15 +9,11 @@ import { useEffect } from 'react'
 const HomePage = (): JSX.Element => {
   const {
     getUser,
-    avatarText,
-    open,
-    handleClose,
-    handleClick,
-    anchorEl,
     sidebarItems,
     selectedMenu,
     userBMI,
     percentUserBMI,
+    isLoading,
     sidebarItemClick,
     logOut
   } = useHomePage()
@@ -34,21 +30,16 @@ const HomePage = (): JSX.Element => {
 
   return (
     <Stack width={'100vw'} height={'100vh'} overflow={'hidden'}>
-      <Header
-        avatarText={avatarText}
-        open={open}
-        handleClick={handleClick}
-        handleClose={handleClose}
-        anchorEl={anchorEl}
-        logOut={logOut}
-      />
-      <Stack flexDirection={'row'}>
+      <Header logOut={logOut} isLoading={isLoading} />
+      <Stack flexDirection={'row'} width={'100%'} height={'91%'}>
         <Sidebar
           sidebarItems={sidebarItems}
           selectedMenu={selectedMenu}
           sidebarItemClick={sidebarItemClick}
+          isLoading={isLoading}
         />
         <ContentHomePage
+          isLoading={isLoading}
           selectedMenu={selectedMenu}
           userBMI={userBMI}
           percentUserBMI={percentUserBMI}
