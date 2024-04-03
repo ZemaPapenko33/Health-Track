@@ -7,6 +7,7 @@ import useAvatarBox from '../../hooks/use-avatar-box.hook'
 
 const AvatarBox: React.FC<TAvatarBox> = ({ logOut }) => {
   const { anchorEl, handleClick, handleClose, avatarText, open } = useAvatarBox()
+
   return (
     <Box>
       <Avatar onClick={handleClick}>{avatarText}</Avatar>
