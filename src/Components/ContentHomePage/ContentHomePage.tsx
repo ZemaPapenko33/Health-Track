@@ -19,7 +19,7 @@ const ContentHomePage: React.FC<TContentHomePage> = ({
         percentUserBMI={percentUserBMI}
         isLoading={isLoading}
       />
-      <Stack>This will be block Food</Stack>
+      <Stack data-text={t('t-food')}>This will be block Food</Stack>
     </ContentSwitch>
   )
 }

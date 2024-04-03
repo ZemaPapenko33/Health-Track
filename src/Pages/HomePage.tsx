@@ -9,11 +9,6 @@ import { useEffect } from 'react'
 const HomePage = (): JSX.Element => {
   const {
     getUser,
-    avatarText,
-    open,
-    handleClose,
-    handleClick,
-    anchorEl,
     sidebarItems,
     selectedMenu,
     userBMI,
@@ -35,15 +30,7 @@ const HomePage = (): JSX.Element => {
 
   return (
     <Stack width={'100vw'} height={'100vh'} overflow={'hidden'}>
-      <Header
-        avatarText={avatarText}
-        open={open}
-        handleClick={handleClick}
-        handleClose={handleClose}
-        anchorEl={anchorEl}
-        logOut={logOut}
-        isLoading={isLoading}
-      />
+      <Header logOut={logOut} isLoading={isLoading} />
       <Stack flexDirection={'row'} width={'100%'} height={'91%'}>
         <Sidebar
           sidebarItems={sidebarItems}

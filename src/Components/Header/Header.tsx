@@ -4,15 +4,7 @@ import { LogoWrapper } from '../Logo/LogoStyled'
 import { THeader } from '../../Types/ComponentTypes'
 import AvatarBox from '../AvatarBox/AvatarBox'
 
-const Header: React.FC<THeader> = ({
-  handleClick,
-  avatarText,
-  anchorEl,
-  open,
-  isLoading,
-  handleClose,
-  logOut
-}) => {
+const Header: React.FC<THeader> = ({ isLoading, logOut }) => {
   return (
     <Stack width={'100%'} height={'9%'}>
       <AppBar position="static">
@@ -28,14 +20,7 @@ const Header: React.FC<THeader> = ({
               <Skeleton animation="wave" variant="circular" width={41} height={41} />
             </Box>
           ) : (
-            <AvatarBox
-              open={open}
-              handleClick={handleClick}
-              handleClose={handleClose}
-              avatarText={avatarText}
-              anchorEl={anchorEl}
-              logOut={logOut}
-            />
+            <AvatarBox logOut={logOut} />
           )}
         </Toolbar>
       </AppBar>

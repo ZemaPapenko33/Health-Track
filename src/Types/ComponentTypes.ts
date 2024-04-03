@@ -100,11 +100,6 @@ export type THAWBlock = {
 }
 
 export type THeader = {
-  avatarText: string
-  handleClose: VoidFunction
-  open: boolean
-  handleClick: (event: React.MouseEvent<HTMLElement>) => void
-  anchorEl: HTMLElement | null
   logOut: VoidFunction
   isLoading: boolean
 }
@@ -151,10 +146,5 @@ export type TSidebarItem = {
 }
 
 export type TAvatarBox = {
-  avatarText: string
-  anchorEl: HTMLElement | null
-  open: boolean
-  handleClick: (event: React.MouseEvent<HTMLElement>) => void
-  handleClose: VoidFunction
   logOut: VoidFunction
 }
