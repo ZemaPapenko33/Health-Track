@@ -1,19 +1,8 @@
-import {
-  AppBar,
-  Avatar,
-  Box,
-  Menu,
-  MenuItem,
-  Skeleton,
-  Stack,
-  Toolbar,
-  Typography
-} from '@mui/material'
-import LogoutIcon from '@mui/icons-material/Logout'
+import { AppBar, Box, Skeleton, Stack, Toolbar, Typography } from '@mui/material'
 import Logo from '../../assets/HealthLogo.png'
 import { LogoWrapper } from '../Logo/LogoStyled'
 import { THeader } from '../../Types/ComponentTypes'
-import { t } from 'i18next'
+import AvatarBox from '../AvatarBox/AvatarBox'
 
 const Header: React.FC<THeader> = ({
   handleClick,
@@ -39,31 +28,14 @@ const Header: React.FC<THeader> = ({
               <Skeleton animation="wave" variant="circular" width={41} height={41} />
             </Box>
           ) : (
-            <Box>
-              <Avatar onClick={handleClick}>{avatarText}</Avatar>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={open}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right'
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
-              >
-                <MenuItem onClick={logOut}>
-                  <Stack gap={0.25} flexDirection={'row'}>
-                    <LogoutIcon />
-                    {t('t-logOut')}
-                  </Stack>
-                </MenuItem>
-              </Menu>
-            </Box>
+            <AvatarBox
+              open={open}
+              handleClick={handleClick}
+              handleClose={handleClose}
+              avatarText={avatarText}
+              anchorEl={anchorEl}
+              logOut={logOut}
+            />
           )}
         </Toolbar>
       </AppBar>

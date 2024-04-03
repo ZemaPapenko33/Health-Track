@@ -149,3 +149,12 @@ export type TSidebarItem = {
   index: number
   item: TSidebarItemObject
 }
+
+export type TAvatarBox = {
+  avatarText: string
+  anchorEl: HTMLElement | null
+  open: boolean
+  handleClick: (event: React.MouseEvent<HTMLElement>) => void
+  handleClose: VoidFunction
+  logOut: VoidFunction
+}
