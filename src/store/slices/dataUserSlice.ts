@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { InitialStateDataUser, TOperation } from '../../Types/DataUserTypes'
-import { OperationType } from '../../shared/enums'
+import { InitialStateDataUser, TOperation, DataTypeMapper } from '../../Types/DataUserTypes'
+import { OperationType as OpType } from '../../shared/enums'
 
 const initialState: InitialStateDataUser = {
   userFood: [],
@@ -18,22 +18,26 @@ const dataUserSlice = createSlice({
   reducers: {
     operationData: (state, action: PayloadAction<TOperation>) => {
       const { type, operation, id, newValue } = action.payload
+
+      // Get the correct type for newValue based on DataType
+      type NewValueType = DataTypeMapper[typeof type]
+
       switch (operation) {
-        case OperationType.ADD: {
-          state[type].push(newValue)
+        case OpType.ADD: {
+          ;(state[type] as NewValueType[]).push(newValue)
           break
         }
-        case OperationType.UPDATE: {
-          const indexToUpdate = state[type].findIndex((item) => item.id === id)
+        case OpType.UPDATE: {
+          const indexToUpdate = (state[type] as NewValueType[]).findIndex((item) => item.id === id)
           if (indexToUpdate !== -1) {
-            state[type][indexToUpdate] = newValue
+            ;(state[type] as NewValueType[])[indexToUpdate] = newValue
           }
           break
         }
-        case OperationType.REMOVE: {
-          const indexToRemove = state[type].findIndex((item) => item.id === id)
+        case OpType.REMOVE: {
+          const indexToRemove = (state[type] as NewValueType[]).findIndex((item) => item.id === id)
           if (indexToRemove !== -1) {
-            state[type].splice(indexToRemove, 1)
+            ;(state[type] as NewValueType[]).splice(indexToRemove, 1)
           }
           break
         }
