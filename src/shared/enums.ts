@@ -19,3 +19,19 @@ export enum Gender {
   FEMALE = 'FEMALE',
   DEFAULT = ''
 }
+
+export enum DataType {
+  Food = 'userFood',
+  Water = 'userWater',
+  Fitness = 'userFitness',
+  Mood = 'userMood',
+  Sleeps = 'userSleeps',
+  Meditation = 'userMeditation',
+  Hobby = 'userHobby'
+}
+
+export enum OperationType {
+  ADD = 'Add',
+  UPDATE = 'Update',
+  REMOVE = 'Remove'
+}

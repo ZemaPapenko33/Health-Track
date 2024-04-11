@@ -1,14 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {
-  InitialStateDataUser,
-  TFitness,
-  TFood,
-  THobby,
-  TMeditation,
-  TMood,
-  TSleeps,
-  TWater
-} from '../../Types/DataUserTypes'
+import { InitialStateDataUser, TOperation } from '../../Types/DataUserTypes'
+import { OperationType } from '../../shared/enums'
 
 const initialState: InitialStateDataUser = {
   userFood: [],
@@ -24,78 +16,30 @@ const dataUserSlice = createSlice({
   name: 'dataUserSlice',
   initialState,
   reducers: {
-    addUserFood: (state, action: PayloadAction<TFood>) => {
-      state.userFood.push(action.payload)
-    },
-    removeUserFood: (state, action: PayloadAction<number>) => {
-      state.userFood.splice(action.payload, 1)
-    },
-    updateUserFood: (state, action: PayloadAction<{ index: number; newValue: TFood }>) => {
-      const { index, newValue } = action.payload
-      state.userFood[index] = newValue
-    },
-    addUserWater: (state, action: PayloadAction<TWater>) => {
-      state.userWater.push(action.payload)
-    },
-    removeUserWater: (state, action: PayloadAction<number>) => {
-      state.userWater.splice(action.payload, 1)
-    },
-    updateUserWater: (state, action: PayloadAction<{ index: number; newValue: TWater }>) => {
-      const { index, newValue } = action.payload
-      state.userWater[index] = newValue
-    },
-    addUserFitness: (state, action: PayloadAction<TFitness>) => {
-      state.userFitness.push(action.payload)
-    },
-    removeUserFitness: (state, action: PayloadAction<number>) => {
-      state.userFitness.splice(action.payload, 1)
-    },
-    updateUserFitness: (state, action: PayloadAction<{ index: number; newValue: TFitness }>) => {
-      const { index, newValue } = action.payload
-      state.userFitness[index] = newValue
-    },
-    addUserMood: (state, action: PayloadAction<TMood>) => {
-      state.userMood.push(action.payload)
-    },
-    removeUserMood: (state, action: PayloadAction<number>) => {
-      state.userMood.splice(action.payload, 1)
-    },
-    updateUserMood: (state, action: PayloadAction<{ index: number; newValue: TMood }>) => {
-      const { index, newValue } = action.payload
-      state.userMood[index] = newValue
-    },
-    addUserSleeps: (state, action: PayloadAction<TSleeps>) => {
-      state.userSleeps.push(action.payload)
-    },
-    removeUserSleeps: (state, action: PayloadAction<number>) => {
-      state.userSleeps.splice(action.payload, 1)
-    },
-    updateUserSleeps: (state, action: PayloadAction<{ index: number; newValue: TSleeps }>) => {
-      const { index, newValue } = action.payload
-      state.userSleeps[index] = newValue
-    },
-    addUserMeditation: (state, action: PayloadAction<TMeditation>) => {
-      state.userMeditation.push(action.payload)
-    },
-    removeUserMeditation: (state, action: PayloadAction<number>) => {
-      state.userMeditation.splice(action.payload, 1)
-    },
-    updateUserMeditation: (
-      state,
-      action: PayloadAction<{ index: number; newValue: TMeditation }>
-    ) => {
-      const { index, newValue } = action.payload
-      state.userMeditation[index] = newValue
-    },
-    addUserHobby: (state, action: PayloadAction<THobby>) => {
-      state.userHobby.push(action.payload)
-    },
-    removeUserHobby: (state, action: PayloadAction<number>) => {
-      state.userHobby.splice(action.payload, 1)
-    },
-    updateUserHobby: (state, action: PayloadAction<{ index: number; newValue: THobby }>) => {
-      const { index, newValue } = action.payload
-      state.userHobby[index] = newValue
+    operationData: (state, action: PayloadAction<TOperation>) => {
+      const { type, operation, id, newValue } = action.payload
+      switch (operation) {
+        case OperationType.ADD: {
+          state[type].push(newValue)
+          break
+        }
+        case OperationType.UPDATE: {
+          const indexToUpdate = state[type].findIndex((item) => item.id === id)
+          if (indexToUpdate !== -1) {
+            state[type][indexToUpdate] = newValue
+          }
+          break
+        }
+        case OperationType.REMOVE: {
+          const indexToRemove = state[type].findIndex((item) => item.id === id)
+          if (indexToRemove !== -1) {
+            state[type].splice(indexToRemove, 1)
+          }
+          break
+        }
+        default:
+          break
+      }
     },
     resetAll: (state) => {
       state.userFood = []
@@ -109,28 +53,5 @@ const dataUserSlice = createSlice({
   }
 })
 
-export const {
-  addUserFood,
-  addUserWater,
-  addUserFitness,
-  addUserMood,
-  addUserSleeps,
-  addUserMeditation,
-  addUserHobby,
-  removeUserFood,
-  removeUserWater,
-  removeUserFitness,
-  removeUserMood,
-  removeUserSleeps,
-  removeUserMeditation,
-  removeUserHobby,
-  updateUserFood,
-  updateUserWater,
-  updateUserFitness,
-  updateUserMood,
-  updateUserSleeps,
-  updateUserMeditation,
-  updateUserHobby,
-  resetAll
-} = dataUserSlice.actions
+export const { operationData, resetAll } = dataUserSlice.actions
 export default dataUserSlice.reducer
