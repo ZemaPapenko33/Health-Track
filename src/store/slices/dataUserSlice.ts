@@ -19,7 +19,6 @@ const dataUserSlice = createSlice({
     operationData: (state, action: PayloadAction<TOperation>) => {
       const { type, operation, id, newValue } = action.payload
 
-      // Get the correct type for newValue based on DataType
       type NewValueType = DataTypeMapper[typeof type]
 
       switch (operation) {
