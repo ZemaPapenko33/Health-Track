@@ -1,14 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {
-  InitialStateDataUser,
-  TFitness,
-  TFood,
-  THobby,
-  TMeditation,
-  TMood,
-  TSleeps,
-  TWater
-} from '../../Types/DataUserTypes'
+import { InitialStateDataUser, TOperation, DataTypeMapper } from '../../Types/DataUserTypes'
+import { OperationType as OpType } from '../../shared/enums'
 
 const initialState: InitialStateDataUser = {
   userFood: [],
@@ -24,26 +16,33 @@ const dataUserSlice = createSlice({
   name: 'dataUserSlice',
   initialState,
   reducers: {
-    addUserFood: (state, action: PayloadAction<TFood>) => {
-      state.userFood.push(action.payload)
-    },
-    addUserWater: (state, action: PayloadAction<TWater>) => {
-      state.userWater.push(action.payload)
-    },
-    addUserFitness: (state, action: PayloadAction<TFitness>) => {
-      state.userFitness.push(action.payload)
-    },
-    addUserMood: (state, action: PayloadAction<TMood>) => {
-      state.userMood.push(action.payload)
-    },
-    addUserSleeps: (state, action: PayloadAction<TSleeps>) => {
-      state.userSleeps.push(action.payload)
-    },
-    addUserMeditation: (state, action: PayloadAction<TMeditation>) => {
-      state.userMeditation.push(action.payload)
-    },
-    addUserHobby: (state, action: PayloadAction<THobby>) => {
-      state.userHobby.push(action.payload)
+    operationData: (state, action: PayloadAction<TOperation>) => {
+      const { type, operation, id, newValue } = action.payload
+
+      type NewValueType = DataTypeMapper[typeof type]
+
+      switch (operation) {
+        case OpType.ADD: {
+          ;(state[type] as NewValueType[]).push(newValue)
+          break
+        }
+        case OpType.UPDATE: {
+          const indexToUpdate = (state[type] as NewValueType[]).findIndex((item) => item.id === id)
+          if (indexToUpdate !== -1) {
+            ;(state[type] as NewValueType[])[indexToUpdate] = newValue
+          }
+          break
+        }
+        case OpType.REMOVE: {
+          const indexToRemove = (state[type] as NewValueType[]).findIndex((item) => item.id === id)
+          if (indexToRemove !== -1) {
+            ;(state[type] as NewValueType[]).splice(indexToRemove, 1)
+          }
+          break
+        }
+        default:
+          break
+      }
     },
     resetAll: (state) => {
       state.userFood = []
@@ -57,14 +56,5 @@ const dataUserSlice = createSlice({
   }
 })
 
-export const {
-  addUserFood,
-  addUserWater,
-  addUserFitness,
-  addUserMood,
-  addUserSleeps,
-  addUserMeditation,
-  addUserHobby,
-  resetAll
-} = dataUserSlice.actions
+export const { operationData, resetAll } = dataUserSlice.actions
 export default dataUserSlice.reducer
