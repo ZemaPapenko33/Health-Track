@@ -69,5 +69,11 @@
   "t-BMI-35.1-40": "Obesity of the second degree",
   "t-BMI-more-40.1": "Obesity of the third degree",
   "t-water-today": "Water today",
-  "t-logOut": "Log out"
+  "t-logOut": "Log out",
+  "t-breakfast": "Breakfast",
+  "t-lunch": "lunch",
+  "t-dinner": "Dinner",
+  "t-additional-meal": "Additional meal",
+  "t-add": "Add",
+  "t-clear": "Clear"
 }

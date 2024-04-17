@@ -1,9 +1,10 @@
 import { Stack, Typography } from '@mui/material'
 import ProgrammFoodBlock from '../PogrammFoodBlock/ProgrammFoodBlock'
 import AddFoodForm from '../AddFoodForm/AddFoodForm'
+import { t } from 'i18next'
 
 const FoodBlock = () => {
-  const foodProgramm = ['Завтрак', 'Обед', 'Ужин']
+  const foodProgramm = [t('t-breakfast'), t('t-lunch'), t('t-dinner')]
 
   return (
     <Stack width={'93%'} height={'100%'}>
@@ -22,13 +23,13 @@ const FoodBlock = () => {
       <Stack flexDirection={'row'} width={'100%'} height={'65%'}>
         <Stack width={'70%'} flexDirection={'row'}>
           <Stack width={'33%'} alignItems={'center'} borderRight={0.25}>
-            <Typography variant="h6">Завтрак</Typography>
+            <Typography variant="h6">{t('t-breakfast')}</Typography>
           </Stack>
           <Stack width={'33%'} alignItems={'center'} borderRight={0.25}>
-            <Typography variant="h6">Обед</Typography>
+            <Typography variant="h6">{t('t-lunch')}</Typography>
           </Stack>
           <Stack width={'33%'} alignItems={'center'}>
-            <Typography variant="h6">Ужин</Typography>
+            <Typography variant="h6">{t('t-dinner')}</Typography>
           </Stack>
         </Stack>
         <AddFoodForm />
