@@ -2,8 +2,8 @@ import React from 'react'
 import { ContentSwitch } from '../ContentSwitch/ContentSwitch'
 import { TContentHomePage } from '../../Types/ComponentTypes'
 import { t } from 'i18next'
-import { Stack } from '@mui/material'
 import Profile from '../Profile/Profile'
+import FoodBlock from '../FoodBlock/FoodBlock'
 
 const ContentHomePage: React.FC<TContentHomePage> = ({
   selectedMenu,
@@ -19,7 +19,7 @@ const ContentHomePage: React.FC<TContentHomePage> = ({
         percentUserBMI={percentUserBMI}
         isLoading={isLoading}
       />
-      <Stack data-text={t('t-food')}>This will be block Food</Stack>
+      <FoodBlock data-text={t('t-food')} />
     </ContentSwitch>
   )
 }

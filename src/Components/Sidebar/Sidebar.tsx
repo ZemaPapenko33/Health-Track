@@ -23,6 +23,7 @@ const Sidebar: React.FC<TSidebar> = ({
                 isSelected={isSelected}
                 index={index}
                 item={item}
+                key={item.id}
                 sidebarItemClick={sidebarItemClick}
               />
             )
