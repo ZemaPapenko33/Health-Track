@@ -1,5 +1,4 @@
 import { CircularProgress, Stack, Typography } from '@mui/material'
-import React from 'react'
 import { theme } from '../../theme'
 import { t } from 'i18next'
 

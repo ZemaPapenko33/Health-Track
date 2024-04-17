@@ -148,3 +148,7 @@ export type TSidebarItem = {
 export type TAvatarBox = {
   logOut: VoidFunction
 }
+
+export type TProgrammFood = {
+  title: string
+}
