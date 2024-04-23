@@ -35,3 +35,9 @@ export enum OperationType {
   UPDATE = 'Update',
   REMOVE = 'Remove'
 }
+
+export enum CategoryFood {
+  BREAKFAST = 'Breakfast',
+  LUNCH = 'Lunch',
+  DINNER = 'Dinner'
+}

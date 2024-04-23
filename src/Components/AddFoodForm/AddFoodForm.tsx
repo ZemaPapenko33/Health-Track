@@ -3,36 +3,67 @@ import { DateCalendar, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { t } from 'i18next'
 import React from 'react'
+import { TAddFoodForm } from '../../Types/ComponentTypes'
+import dayjs from 'dayjs'
 
-const AddFoodForm = () => {
+const AddFoodForm: React.FC<TAddFoodForm> = ({
+  nameFood,
+  categoryFood,
+  isNotEmpty,
+  onChangeCategory,
+  clearHandleClick,
+  todayHandleClick,
+  onChangeNameFood,
+  addHandleClick,
+  selectedDate,
+  handleDateChange
+}) => {
   return (
     <Stack width={'30%'} borderLeft={0.25} padding={'0.25rem'}>
-      <TextField label="Name food" variant="standard" type="text" />
+      <TextField
+        label="Name food"
+        variant="standard"
+        type="text"
+        value={nameFood}
+        onChange={onChangeNameFood}
+      />
       <FormControl variant="standard">
         <InputLabel id="demo-simple-select-standard-label">Тип приема пищи</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
           label="Age"
+          value={categoryFood}
+          onChange={onChangeCategory}
         >
           <MenuItem value={t('t-breakfast')}>{t('t-breakfast')}</MenuItem>
           <MenuItem value={t('t-lunch')}>{t('t-lunch')}</MenuItem>
           <MenuItem value={t('t-dinner')}>{t('t-dinner')}</MenuItem>
-          <MenuItem value={t('t-additional-meal')}>{t('t-additional-meal')}</MenuItem>
         </Select>
       </FormControl>
       <Stack
         flexDirection={'row'}
         padding={'0.25rem'}
         justifyContent={'space-between'}
-        width={'37%'}
+        width={'57%'}
       >
-        <Button variant="contained">{t('t-add')}</Button>
-        <Button variant="outlined">{t('t-clear')}</Button>
+        <Button variant="contained" disabled={isNotEmpty} onClick={addHandleClick}>
+          Add
+        </Button>
+        <Button variant="outlined" onClick={clearHandleClick}>
+          Clear
+        </Button>
+        <Button variant="outlined" onClick={todayHandleClick}>
+          Today
+        </Button>
       </Stack>
       <Stack width={'10%'}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar views={['day']} />
+          <DateCalendar
+            views={['day']}
+            onChange={handleDateChange}
+            value={dayjs(selectedDate, 'DD.MM.YYYY')}
+          />
         </LocalizationProvider>
       </Stack>
     </Stack>

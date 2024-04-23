@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
+import dayjs, { Dayjs } from 'dayjs'
 
 type TContext = {
   email: string
@@ -7,6 +8,8 @@ type TContext = {
   setPassword: React.Dispatch<React.SetStateAction<string>>
   emailInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
   passwordInputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleDateChange: (date: Dayjs) => void
+  selectedDate: string
 }
 
 type ProviderProps = {
@@ -18,6 +21,7 @@ const AppContext = createContext<TContext | undefined>(undefined)
 export const BasicProvider: React.FC<ProviderProps> = ({ children }) => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [selectedDate, setSelectedDate] = useState(dayjs().format('DD.MM.YYYY'))
 
   const emailInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value)
@@ -27,15 +31,21 @@ export const BasicProvider: React.FC<ProviderProps> = ({ children }) => {
     setPassword(event.target.value)
   }
 
+  const handleDateChange = (date: Dayjs) => {
+    setSelectedDate(date.format('DD.MM.YYYY'))
+  }
+
   return (
     <AppContext.Provider
       value={{
         email,
         password,
+        selectedDate,
         setEmail,
         setPassword,
         emailInputHandler,
-        passwordInputHandler
+        passwordInputHandler,
+        handleDateChange
       }}
     >
       {children}
