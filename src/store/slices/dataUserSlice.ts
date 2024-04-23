@@ -23,13 +23,13 @@ const dataUserSlice = createSlice({
 
       switch (operation) {
         case OpType.ADD: {
-          ;(state[type] as NewValueType[]).push(newValue)
+          ;(state[type] as NewValueType[]).push(newValue!)
           break
         }
         case OpType.UPDATE: {
           const indexToUpdate = (state[type] as NewValueType[]).findIndex((item) => item.id === id)
           if (indexToUpdate !== -1) {
-            ;(state[type] as NewValueType[])[indexToUpdate] = newValue
+            ;(state[type] as NewValueType[])[indexToUpdate] = newValue!
           }
           break
         }
