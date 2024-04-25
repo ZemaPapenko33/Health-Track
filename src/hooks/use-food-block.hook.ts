@@ -1,5 +1,5 @@
 import { SelectChangeEvent } from '@mui/material'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useAppContext } from '../context'
 import dayjs from 'dayjs'
 import { TFood } from '../Types/DataUserTypes'
@@ -7,8 +7,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { operationData } from '../store/slices/dataUserSlice'
 import { DataType, OperationType } from '../shared/enums'
 import { t } from 'i18next'
-import { getFoodByCategory } from '../store/selectors/selectors'
+import { getFoodByCategory, getUserFood } from '../store/selectors/selectors'
 import { v4 as uuidv4 } from 'uuid'
+import { addDoc, collection, doc, getDocs, query, updateDoc, where } from 'firebase/firestore'
+import { db } from '../firebase/firebaseConfig'
 
 type FoodBlock = {
   foodProgram: Array<string>
@@ -25,13 +27,15 @@ type FoodBlock = {
 }
 
 function useFoodBlock(): FoodBlock {
-  const { handleDateChange } = useAppContext()
+  const { handleDateChange, selectedDate } = useAppContext()
   const foodProgram = [t('t-breakfast'), t('t-lunch'), t('t-dinner')]
   const [nameFood, setNameFood] = useState<string>('')
   const [categoryFood, setCategoryFood] = useState<string>('')
   const isNotEmpty = !(nameFood && categoryFood)
   const dispatch = useDispatch()
   const breakfastFoods = useSelector((state) => getFoodByCategory(state, t('t-breakfast')))
+  const allFoodUser = useSelector(getUserFood)
+  const email = localStorage.getItem('email')
 
   const clearHandleClick = () => {
     setNameFood('')
@@ -50,16 +54,43 @@ function useFoodBlock(): FoodBlock {
     handleDateChange(dayjs())
   }
 
-  const createobjectFood = (): TFood => {
-    const userFood = {
-      id: uuidv4(),
-      calories: 1,
-      nameFood: nameFood,
-      categoryFood: categoryFood
-    }
+  const createobjectFood = (): TFood => ({
+    id: uuidv4(),
+    calories: 1,
+    nameFood: nameFood,
+    categoryFood: categoryFood
+  })
 
-    return userFood
-  }
+  const checkOrCreateDocument = useCallback(
+    async (userEmail: string, date: string) => {
+      const request = query(
+        collection(db, 'DataUsers'),
+        where('email', '==', userEmail),
+        where('date', '==', date)
+      )
+      const querySnapshot = await getDocs(request)
+
+      if (!querySnapshot.empty) {
+        return querySnapshot.docs[0].id
+      } else {
+        const docRef = await addDoc(collection(db, 'DataUsers'), {
+          email: email,
+          date: selectedDate
+        })
+
+        return docRef.id
+      }
+    },
+    [email, selectedDate]
+  )
+
+  const setUserFoodDB = useCallback(async () => {
+    const document = await checkOrCreateDocument(email!, selectedDate)
+    const updateDocRef = doc(db, 'DataUsers', document)
+    await updateDoc(updateDocRef, {
+      UserFood: allFoodUser
+    })
+  }, [allFoodUser, checkOrCreateDocument, email, selectedDate])
 
   const addHandleClick = () => {
     const sliceObject = {
@@ -69,6 +100,7 @@ function useFoodBlock(): FoodBlock {
     }
     dispatch(operationData(sliceObject))
     clearHandleClick()
+    setUserFoodDB()
   }
 
   const deleteHandler = (id: string) => {
@@ -78,6 +110,7 @@ function useFoodBlock(): FoodBlock {
       id: id
     }
     dispatch(operationData(sliceObject))
+    setUserFoodDB()
   }
 
   return {
