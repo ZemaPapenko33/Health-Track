@@ -5,6 +5,7 @@ import useFoodBlock from '../../hooks/use-food-block.hook'
 import { t } from 'i18next'
 import { useAppContext } from '../../context'
 import { FoodChipWrapper } from '../FoodChip/FoodChipStyled'
+import { useEffect } from 'react'
 
 const FoodBlock = () => {
   const {
@@ -18,9 +19,14 @@ const FoodBlock = () => {
     onChangeNameFood,
     onChangeCategory,
     deleteHandler,
+    getUserFoodDB,
     categoryFood
   } = useFoodBlock()
   const { handleDateChange, selectedDate } = useAppContext()
+
+  useEffect(() => {
+    getUserFoodDB(selectedDate)
+  }, [])
 
   return (
     <Stack width={'93%'} height={'100%'}>

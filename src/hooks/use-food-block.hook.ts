@@ -21,6 +21,7 @@ type FoodBlock = {
   onChangeNameFood: (event: React.ChangeEvent<HTMLInputElement>) => void
   onChangeCategory: (event: SelectChangeEvent<string>) => void
   deleteHandler: (id: string) => void
+  getUserFoodDB: (date: string) => Promise<void>
   categoryFood: string
   isNotEmpty: boolean
   breakfastFoods: Array<TFood>
@@ -84,13 +85,31 @@ function useFoodBlock(): FoodBlock {
     [email, selectedDate]
   )
 
-  const setUserFoodDB = useCallback(async () => {
-    const document = await checkOrCreateDocument(email!, selectedDate)
-    const updateDocRef = doc(db, 'DataUsers', document)
-    await updateDoc(updateDocRef, {
-      UserFood: allFoodUser
-    })
-  }, [allFoodUser, checkOrCreateDocument, email, selectedDate])
+  const formatData = useCallback(
+    (operation: OperationType, id?: string, value?: TFood) => {
+      const copyFood = [...allFoodUser]
+      switch (operation) {
+        case OperationType.ADD:
+          return [...copyFood, value]
+          break
+        case OperationType.REMOVE:
+          return copyFood.filter((item) => item.id !== id)
+          break
+      }
+    },
+    [allFoodUser]
+  )
+
+  const setUserFoodDB = useCallback(
+    async (operation: OperationType, id?: string, value?: TFood) => {
+      const document = await checkOrCreateDocument(email!, selectedDate)
+      const updateDocRef = doc(db, 'DataUsers', document)
+      await updateDoc(updateDocRef, {
+        UserFood: formatData(operation, id, value)
+      })
+    },
+    [formatData, checkOrCreateDocument, email, selectedDate]
+  )
 
   const addHandleClick = () => {
     const sliceObject = {
@@ -100,7 +119,7 @@ function useFoodBlock(): FoodBlock {
     }
     dispatch(operationData(sliceObject))
     clearHandleClick()
-    setUserFoodDB()
+    setUserFoodDB(sliceObject.operation, undefined, sliceObject.newValue)
   }
 
   const deleteHandler = (id: string) => {
@@ -110,7 +129,27 @@ function useFoodBlock(): FoodBlock {
       id: id
     }
     dispatch(operationData(sliceObject))
-    setUserFoodDB()
+    setUserFoodDB(sliceObject.operation, sliceObject.id)
+  }
+
+  const setUserFoodRedux = (userFoodArray: Array<TFood>) => {
+    userFoodArray.forEach((food) => {
+      const sliceObject = {
+        type: DataType.Food,
+        operation: OperationType.ADD,
+        newValue: food
+      }
+      dispatch(operationData(sliceObject))
+    })
+  }
+
+  const getUserFoodDB = async (date: string) => {
+    const foodRef = collection(db, 'DataUsers')
+    const request = query(foodRef, where('date', '==', date), where('email', '==', email))
+    const Snapshot = await getDocs(request)
+    const { UserFood } = Snapshot.docs[0].data()
+    const userFoodArray: Array<TFood> = UserFood as Array<TFood>
+    setUserFoodRedux(userFoodArray)
   }
 
   return {
@@ -124,7 +163,8 @@ function useFoodBlock(): FoodBlock {
     onChangeCategory,
     todayHandleClick,
     addHandleClick,
-    deleteHandler
+    deleteHandler,
+    getUserFoodDB
   }
 }
 
