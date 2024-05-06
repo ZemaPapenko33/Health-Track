@@ -13,6 +13,8 @@ const FoodBlock = () => {
     nameFood,
     isNotEmpty,
     breakfastFoods,
+    lunchFoods,
+    dinnerFoods,
     clearHandleClick,
     todayHandleClick,
     addHandleClick,
@@ -61,9 +63,33 @@ const FoodBlock = () => {
           </Stack>
           <Stack width={'33%'} alignItems={'center'} borderRight={0.25}>
             <Typography variant="h6">{t('t-lunch')}</Typography>
+            {lunchFoods.map((item, index) => {
+              return (
+                <FoodChipWrapper
+                  key={index}
+                  variant="outlined"
+                  color="success"
+                  label={item.nameFood}
+                  id={item.id}
+                  onDelete={() => deleteHandler(item.id)}
+                />
+              )
+            })}
           </Stack>
           <Stack width={'33%'} alignItems={'center'}>
             <Typography variant="h6">{t('t-dinner')}</Typography>
+            {dinnerFoods.map((item, index) => {
+              return (
+                <FoodChipWrapper
+                  key={index}
+                  variant="outlined"
+                  color="success"
+                  label={item.nameFood}
+                  id={item.id}
+                  onDelete={() => deleteHandler(item.id)}
+                />
+              )
+            })}
           </Stack>
         </Stack>
         <AddFoodForm

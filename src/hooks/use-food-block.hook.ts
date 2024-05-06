@@ -25,6 +25,8 @@ type FoodBlock = {
   categoryFood: string
   isNotEmpty: boolean
   breakfastFoods: Array<TFood>
+  lunchFoods: Array<TFood>
+  dinnerFoods: Array<TFood>
 }
 
 function useFoodBlock(): FoodBlock {
@@ -37,6 +39,8 @@ function useFoodBlock(): FoodBlock {
   const breakfastFoods = useSelector((state) =>
     getFoodByCategory(state, t('t-breakfast'), selectedDate)
   )
+  const lunchFoods = useSelector((state) => getFoodByCategory(state, t('t-lunch'), selectedDate))
+  const dinnerFoods = useSelector((state) => getFoodByCategory(state, t('t-dinner'), selectedDate))
   const allFoodUser = useSelector(getUserFood)
   const email = localStorage.getItem('email')
 
@@ -159,6 +163,8 @@ function useFoodBlock(): FoodBlock {
     categoryFood,
     isNotEmpty,
     breakfastFoods,
+    lunchFoods,
+    dinnerFoods,
     clearHandleClick,
     onChangeNameFood,
     onChangeCategory,
