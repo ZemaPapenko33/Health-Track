@@ -21,14 +21,14 @@ const AddFoodForm: React.FC<TAddFoodForm> = ({
   return (
     <Stack width={'30%'} borderLeft={0.25} padding={'0.25rem'}>
       <TextField
-        label="Name food"
+        label={t('t-name-food')}
         variant="standard"
         type="text"
         value={nameFood}
         onChange={onChangeNameFood}
       />
       <FormControl variant="standard">
-        <InputLabel id="demo-simple-select-standard-label">Тип приема пищи</InputLabel>
+        <InputLabel id="demo-simple-select-standard-label">{t('t-type-of-meal')}</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
@@ -45,16 +45,16 @@ const AddFoodForm: React.FC<TAddFoodForm> = ({
         flexDirection={'row'}
         padding={'0.25rem'}
         justifyContent={'space-between'}
-        width={'57%'}
+        width={'80%'}
       >
         <Button variant="contained" disabled={isNotEmpty} onClick={addHandleClick}>
-          Add
+          {t('t-add')}
         </Button>
         <Button variant="outlined" onClick={clearHandleClick}>
-          Clear
+          {t('t-clear')}
         </Button>
         <Button variant="outlined" onClick={todayHandleClick}>
-          Today
+          {t('t-today')}
         </Button>
       </Stack>
       <Stack width={'10%'}>

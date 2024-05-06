@@ -75,5 +75,8 @@
   "t-dinner": "Dinner",
   "t-additional-meal": "Additional meal",
   "t-add": "Add",
-  "t-clear": "Clear"
+  "t-clear": "Clear",
+  "t-today": "Today",
+  "t-name-food": "Name food",
+  "t-type-of-meal": "Type of meal"
 }

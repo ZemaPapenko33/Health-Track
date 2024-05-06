@@ -34,7 +34,9 @@ function useFoodBlock(): FoodBlock {
   const [categoryFood, setCategoryFood] = useState<string>('')
   const isNotEmpty = !(nameFood && categoryFood)
   const dispatch = useDispatch()
-  const breakfastFoods = useSelector((state) => getFoodByCategory(state, t('t-breakfast')))
+  const breakfastFoods = useSelector((state) =>
+    getFoodByCategory(state, t('t-breakfast'), selectedDate)
+  )
   const allFoodUser = useSelector(getUserFood)
   const email = localStorage.getItem('email')
 
@@ -56,6 +58,7 @@ function useFoodBlock(): FoodBlock {
   }
 
   const createobjectFood = (): TFood => ({
+    date: selectedDate,
     id: uuidv4(),
     calories: 1,
     nameFood: nameFood,
@@ -91,10 +94,8 @@ function useFoodBlock(): FoodBlock {
       switch (operation) {
         case OperationType.ADD:
           return [...copyFood, value]
-          break
         case OperationType.REMOVE:
           return copyFood.filter((item) => item.id !== id)
-          break
       }
     },
     [allFoodUser]

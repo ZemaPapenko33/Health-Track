@@ -1,6 +1,7 @@
 import { DataType, OperationType } from '../shared/enums'
 
 export type TFood = {
+  date: string
   id: string
   calories: number
   nameFood: string
