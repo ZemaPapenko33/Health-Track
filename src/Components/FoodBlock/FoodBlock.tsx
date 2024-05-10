@@ -1,11 +1,11 @@
 import { Stack, Typography } from '@mui/material'
-import ProgrammFoodBlock from '../PogrammFoodBlock/ProgrammFoodBlock'
 import AddFoodForm from '../AddFoodForm/AddFoodForm'
 import useFoodBlock from '../../hooks/use-food-block.hook'
 import { t } from 'i18next'
 import { useAppContext } from '../../context'
-import { FoodChipWrapper } from '../FoodChip/FoodChipStyled'
 import { useEffect } from 'react'
+import ProgramFoodBlock from '../PogramFoodBlock/ProgramFoodBlock'
+import FoodChip from '../FoodChip/FoodChip'
 
 const FoodBlock = () => {
   const {
@@ -41,7 +41,7 @@ const FoodBlock = () => {
         justifyContent={'space-between'}
       >
         {foodProgram.map((title) => {
-          return <ProgrammFoodBlock title={title} key={title} />
+          return <ProgramFoodBlock title={title} key={title} />
         })}
       </Stack>
       <Stack flexDirection={'row'} width={'100%'} height={'65%'}>
@@ -49,46 +49,19 @@ const FoodBlock = () => {
           <Stack width={'33%'} alignItems={'center'} borderRight={0.25} padding={'0.25rem'}>
             <Typography variant="h6">{t('t-breakfast')}</Typography>
             {breakfastFoods.map((item, index) => {
-              return (
-                <FoodChipWrapper
-                  key={index}
-                  variant="outlined"
-                  color="success"
-                  label={item.nameFood}
-                  id={item.id}
-                  onDelete={() => deleteHandler(item.id)}
-                />
-              )
+              return <FoodChip key={index} item={item} deleteHandler={deleteHandler} />
             })}
           </Stack>
           <Stack width={'33%'} alignItems={'center'} borderRight={0.25}>
             <Typography variant="h6">{t('t-lunch')}</Typography>
             {lunchFoods.map((item, index) => {
-              return (
-                <FoodChipWrapper
-                  key={index}
-                  variant="outlined"
-                  color="success"
-                  label={item.nameFood}
-                  id={item.id}
-                  onDelete={() => deleteHandler(item.id)}
-                />
-              )
+              return <FoodChip key={index} item={item} deleteHandler={deleteHandler} />
             })}
           </Stack>
           <Stack width={'33%'} alignItems={'center'}>
             <Typography variant="h6">{t('t-dinner')}</Typography>
             {dinnerFoods.map((item, index) => {
-              return (
-                <FoodChipWrapper
-                  key={index}
-                  variant="outlined"
-                  color="success"
-                  label={item.nameFood}
-                  id={item.id}
-                  onDelete={() => deleteHandler(item.id)}
-                />
-              )
+              return <FoodChip key={index} item={item} deleteHandler={deleteHandler} />
             })}
           </Stack>
         </Stack>
