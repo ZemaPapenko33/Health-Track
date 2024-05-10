@@ -3,6 +3,8 @@ import { TErrorMessage } from './ErrorTypes'
 import { UserInfo } from './UserTypes'
 import { SelectChangeEvent } from '@mui/material'
 import { TSidebarItemObject } from './ObjectTypes'
+import { Dayjs } from 'dayjs'
+import { TFood } from './DataUserTypes'
 
 export type TEmailInput = {
   emailError: boolean
@@ -149,6 +151,24 @@ export type TAvatarBox = {
   logOut: VoidFunction
 }
 
-export type TProgrammFood = {
+export type TProgramFood = {
   title: string
+}
+
+export type TAddFoodForm = {
+  nameFood: string
+  clearHandleClick: VoidFunction
+  onChangeNameFood: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChangeCategory: (event: SelectChangeEvent<string>) => void
+  handleDateChange: (date: Dayjs) => void
+  todayHandleClick: VoidFunction
+  addHandleClick: VoidFunction
+  categoryFood: string
+  isNotEmpty: boolean
+  selectedDate: string
+}
+
+export type TFoodChip = {
+  item: TFood
+  deleteHandler: (id: string) => void
 }

@@ -1,9 +1,11 @@
 import { DataType, OperationType } from '../shared/enums'
 
 export type TFood = {
-  id: number | string
+  date: string
+  id: string
   calories: number
   nameFood: string
+  categoryFood: string
 }
 
 export type TWater = {
@@ -70,6 +72,6 @@ export type DataTypeMapper = {
 export type TOperation = {
   type: DataType
   operation: OperationType
-  id: number | string
-  newValue: DataTypeMapper[DataType]
+  id?: number | string
+  newValue?: DataTypeMapper[DataType]
 }

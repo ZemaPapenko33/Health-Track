@@ -1,9 +1,9 @@
 import { CircularProgress, Stack, Typography } from '@mui/material'
 import React from 'react'
 import { theme } from '../../theme'
-import { TProgrammFood } from '../../Types/ComponentTypes'
+import { TProgramFood } from '../../Types/ComponentTypes'
 
-const ProgrammFoodBlock: React.FC<TProgrammFood> = ({ title }) => {
+const ProgramFoodBlock: React.FC<TProgramFood> = ({ title }) => {
   return (
     <Stack
       width={'33%'}
@@ -38,4 +38,4 @@ const ProgrammFoodBlock: React.FC<TProgrammFood> = ({ title }) => {
   )
 }
 
-export default ProgrammFoodBlock
+export default ProgramFoodBlock
