@@ -1,4 +1,13 @@
-import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material'
+import {
+  Button,
+  ButtonGroup,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField
+} from '@mui/material'
 import { DateCalendar, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { t } from 'i18next'
@@ -41,21 +50,18 @@ const AddFoodForm: React.FC<TAddFoodForm> = ({
           <MenuItem value={t('t-dinner')}>{t('t-dinner')}</MenuItem>
         </Select>
       </FormControl>
-      <Stack
-        flexDirection={'row'}
-        padding={'0.25rem'}
-        justifyContent={'space-between'}
-        width={'80%'}
-      >
-        <Button variant="contained" disabled={isNotEmpty} onClick={addHandleClick}>
-          {t('t-add')}
-        </Button>
-        <Button variant="outlined" onClick={clearHandleClick}>
-          {t('t-clear')}
-        </Button>
-        <Button variant="outlined" onClick={todayHandleClick}>
-          {t('t-today')}
-        </Button>
+      <Stack flexDirection={'row'} padding={'0.5rem'} width={'80%'}>
+        <ButtonGroup>
+          <Button variant="contained" disabled={isNotEmpty} onClick={addHandleClick}>
+            {t('t-add')}
+          </Button>
+          <Button variant="outlined" onClick={clearHandleClick}>
+            {t('t-clear')}
+          </Button>
+          <Button variant="outlined" onClick={todayHandleClick}>
+            {t('t-today')}
+          </Button>
+        </ButtonGroup>
       </Stack>
       <Stack width={'10%'}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
