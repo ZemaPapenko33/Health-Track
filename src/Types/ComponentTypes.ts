@@ -4,7 +4,7 @@ import { UserInfo } from './UserTypes'
 import { SelectChangeEvent } from '@mui/material'
 import { TSidebarItemObject } from './ObjectTypes'
 import { Dayjs } from 'dayjs'
-import { TFood } from './DataUserTypes'
+import { TFood, TWater } from './DataUserTypes'
 
 export type TEmailInput = {
   emailError: boolean
@@ -170,5 +170,10 @@ export type TAddFoodForm = {
 
 export type TFoodChip = {
   item: TFood
+  deleteHandler: (id: string) => void
+}
+
+export type TWaterChip = {
+  item: TWater
   deleteHandler: (id: string) => void
 }
