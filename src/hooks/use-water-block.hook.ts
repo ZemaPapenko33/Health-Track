@@ -29,7 +29,10 @@ function useWaterBlock(): WaterBlock {
   const email = localStorage.getItem('email')
 
   const handleChangeWaterInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setWaterMl(Number(event.target.value))
+    const inputValue = Number(event.target.value)
+    if (inputValue >= 0) {
+      setWaterMl(inputValue)
+    }
   }
   const todayHandleClick = () => {
     handleDateChange(dayjs())
