@@ -18,6 +18,7 @@ type WaterBlock = {
   clearButtonHandler: VoidFunction
   addButtonHandler: VoidFunction
   deleteHandler: (id: string) => void
+  getUserWaterDB: (date: string) => Promise<void>
 }
 
 function useWaterBlock(): WaterBlock {
@@ -111,6 +112,25 @@ function useWaterBlock(): WaterBlock {
     dispatch(operationData(sliceObject))
     setUserWaterDB(sliceObject.operation, sliceObject.id)
   }
+  const setUserWaterRedux = (userWaterArray: Array<TWater>) => {
+    userWaterArray.forEach((water) => {
+      const sliceObject = {
+        type: DataType.Water,
+        operation: OperationType.ADD,
+        newValue: water
+      }
+      dispatch(operationData(sliceObject))
+    })
+  }
+
+  const getUserWaterDB = async (date: string) => {
+    const foodRef = collection(db, 'DataUsers')
+    const request = query(foodRef, where('date', '==', date), where('email', '==', email))
+    const Snapshot = await getDocs(request)
+    const { UserWater } = Snapshot.docs[0].data()
+    const userFoodArray: Array<TWater> = UserWater as Array<TWater>
+    setUserWaterRedux(userFoodArray)
+  }
 
   return {
     waterMl,
@@ -119,7 +139,8 @@ function useWaterBlock(): WaterBlock {
     todayHandleClick,
     clearButtonHandler,
     addButtonHandler,
-    deleteHandler
+    deleteHandler,
+    getUserWaterDB
   }
 }
 

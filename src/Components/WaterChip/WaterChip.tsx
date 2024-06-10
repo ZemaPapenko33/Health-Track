@@ -6,6 +6,7 @@ const WaterChip: React.FC<TWaterChip> = ({ item, deleteHandler }) => {
   const handleDelete = useCallback(() => {
     deleteHandler(item.id)
   }, [item, deleteHandler])
+
   return (
     <WaterChipWrapper
       key={item.id}

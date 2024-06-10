@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Stack, TextField, Typography } from '@mui/material
 import { DateCalendar, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAppContext } from '../../context'
 import { t } from 'i18next'
 import useWaterBlock from '../../hooks/use-water-block.hook'
@@ -17,8 +17,13 @@ const WaterBlock = () => {
     todayHandleClick,
     clearButtonHandler,
     addButtonHandler,
-    deleteHandler
+    deleteHandler,
+    getUserWaterDB
   } = useWaterBlock()
+
+  useEffect(() => {
+    getUserWaterDB(selectedDate)
+  }, [])
 
   return (
     <Stack width={'93%'} height={'100%'}>
