@@ -11,7 +11,7 @@ import { addDoc, collection, doc, getDocs, query, updateDoc, where } from 'fireb
 import { db } from '../firebase/firebaseConfig'
 
 type WaterBlock = {
-  waterMl: number | undefined
+  waterMl: number | null
   allWater: Array<TWater>
   handleChangeWaterInput: (event: React.ChangeEvent<HTMLInputElement>) => void
   todayHandleClick: VoidFunction
@@ -22,7 +22,7 @@ type WaterBlock = {
 }
 
 function useWaterBlock(): WaterBlock {
-  const [waterMl, setWaterMl] = useState<number | undefined>()
+  const [waterMl, setWaterMl] = useState<number | null>(null)
   const { selectedDate, handleDateChange } = useAppContext()
   const dispatch = useDispatch()
   const allWater = useSelector(getUserWater)
@@ -39,7 +39,7 @@ function useWaterBlock(): WaterBlock {
   }
 
   const clearButtonHandler = () => {
-    setWaterMl(undefined)
+    setWaterMl(null)
   }
   const checkOrCreateDocument = useCallback(
     async (userEmail: string, date: string) => {
