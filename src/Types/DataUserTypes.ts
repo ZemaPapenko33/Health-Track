@@ -9,7 +9,7 @@ export type TFood = {
 }
 
 export type TWater = {
-  id: number | string
+  id: string
   ml: number
   time: string
 }

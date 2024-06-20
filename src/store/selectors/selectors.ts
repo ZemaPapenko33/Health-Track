@@ -9,3 +9,4 @@ export const getFoodByCategory = createSelector(
     return userFood.filter((food) => food.categoryFood === category && food.date === date)
   }
 )
+export const getUserWater = (state: RootState) => state.dataUserSlice.userWater
