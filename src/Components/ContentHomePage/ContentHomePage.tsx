@@ -5,6 +5,7 @@ import { t } from 'i18next'
 import Profile from '../Profile/Profile'
 import FoodBlock from '../FoodBlock/FoodBlock'
 import WaterBlock from '../WaterBlock/WaterBlock'
+import MoodBlock from '../MoodBlock/MoodBlock'
 
 const ContentHomePage: React.FC<TContentHomePage> = ({
   selectedMenu,
@@ -22,6 +23,7 @@ const ContentHomePage: React.FC<TContentHomePage> = ({
       />
       <FoodBlock data-text={t('t-food')} />
       <WaterBlock data-text={t('t-water')} />
+      <MoodBlock data-text={t('t-mood')} />
     </ContentSwitch>
   )
 }
