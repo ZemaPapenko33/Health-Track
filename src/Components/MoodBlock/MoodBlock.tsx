@@ -1,19 +1,13 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  Typography
-} from '@mui/material'
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material'
 import useMoodBlock from '../../hooks/use-mood-block.hook'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ButtonYear from '../ButtonYear/ButtonYear'
+import { CalendarDayWrapper } from '../CalendarDay/CalendarDayStyled'
 
 const MoodBlock = () => {
-  const { months, year, days, handleChangeMonth, incrementYear, decrementYear } = useMoodBlock()
+  const { daysOfWeek, months, year, days, handleChangeMonth, incrementYear, decrementYear } =
+    useMoodBlock()
 
   return (
     <Stack
@@ -24,13 +18,9 @@ const MoodBlock = () => {
       justifyContent={'center'}
     >
       <Stack flexDirection={'row'} height={'15%'} padding={'0.5rem'} justifyContent={'center'}>
-        <Button onClick={decrementYear}>
-          <ArrowBackIosIcon />
-        </Button>
+        <ButtonYear onClickHandler={decrementYear} icon={<ArrowBackIosIcon />} />
         <Typography variant="h3">{year}</Typography>
-        <Button onClick={incrementYear}>
-          <ArrowForwardIosIcon />
-        </Button>
+        <ButtonYear onClickHandler={incrementYear} icon={<ArrowForwardIosIcon />} />
         <FormControl variant="outlined">
           <InputLabel id="demo-simple-select-label">Month</InputLabel>
           <Select
@@ -40,39 +30,27 @@ const MoodBlock = () => {
             style={{ width: '150px' }}
             onChange={handleChangeMonth}
           >
-            {months.map((month) => {
-              return (
-                <MenuItem value={month.id} key={month.id}>
-                  {month.monthName}
-                </MenuItem>
-              )
-            })}
+            {months.map((month) => (
+              <MenuItem value={month.id} key={month.id}>
+                {month.monthName}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
+        <Button>Today</Button>
       </Stack>
       <Stack
         height={'85%'}
         flexDirection={'row'}
         flexWrap={'wrap'}
-        padding={'0.5rem'}
-        justifyContent={'center'}
+        paddingLeft={'1.5rem'}
+        justifyContent={'flex-start'}
       >
-        {days.map((day) => {
-          return (
-            <Box
-              marginRight={'0.5rem'}
-              display={'flex'}
-              width={'14%'}
-              height={'10%'}
-              justifyContent={'center'}
-              alignItems={'center'}
-              border={0.5}
-              borderRadius={'0.75rem'}
-            >
-              {`${day.getDate()}`}
-            </Box>
-          )
-        })}
+        {days.map((day) => (
+          <CalendarDayWrapper>
+            {`${day.getDate()}`} | {`${daysOfWeek[day.getDay()]}`}
+          </CalendarDayWrapper>
+        ))}
       </Stack>
     </Stack>
   )

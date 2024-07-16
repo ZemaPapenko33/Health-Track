@@ -177,3 +177,8 @@ export type TWaterChip = {
   item: TWater
   deleteHandler: (id: string) => void
 }
+
+export type TButtonYear = {
+  onClickHandler: VoidFunction
+  icon: JSX.Element
+}
