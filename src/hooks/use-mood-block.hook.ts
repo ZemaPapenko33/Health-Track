@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { TMonths } from '../Types/ObjectTypes'
 import { SelectChangeEvent } from '@mui/material'
 
@@ -50,18 +50,17 @@ function useMoodBlock(): MoodBlock {
   const decrementYear = () => {
     setYear((prevYear) => prevYear - 1)
   }
-  const getDays = (myYear: number, myMonth: number): Date[] => {
-    const daysInMonth = new Date(myYear, myMonth + 1, 0).getDate()
+
+  const days = useMemo(() => {
+    const daysInMonth = new Date(year, month + 1, 0).getDate()
     const result: Date[] = new Array(daysInMonth)
 
     for (let index = 0; index < daysInMonth; index++) {
-      result[index] = new Date(myYear, myMonth, index + 1)
+      result[index] = new Date(year, month, index + 1)
     }
 
     return result
-  }
-
-  const days = getDays(year, month)
+  }, [year, month])
 
   return {
     daysOfWeek,
